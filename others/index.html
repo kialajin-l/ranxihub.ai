@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="description" content="RanxiHub.AI other systems - FrameTale for continuous creation, the Digital Life concept, and the DSH-PLUS plugin set.">
+<title>RanxiHub.AI · Other Systems</title>
+<link rel="stylesheet" href="../assets/portal.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  /* Other systems page · local inline styles */
+  .branch { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 26px; }
+  .branch-card { background: var(--card, #1c1917); border: 1px solid var(--line); border-radius: 16px; padding: 28px 30px; }
+  .branch-card h3 { margin: 0 0 6px; font-size: 22px; font-weight: 750; }
+  .branch-card .branch-tag { font-family: var(--mono, monospace); font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted, #a8a29e); }
+  .branch-card p { color: var(--muted, #a8a29e); font-size: 14.5px; line-height: 1.75; margin: 10px 0 0; }
+  .branch-cta { display: inline-block; margin-top: 16px; font-family: var(--mono, monospace); font-size: 12.5px; color: var(--amber, #f59e0b); border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 18px; text-decoration: none; }
+  .branch-cta:hover { border-color: var(--amber, #f59e0b); }
+  @media (max-width: 760px) { .branch { grid-template-columns: 1fr; } }
+  .media-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+  @media (max-width: 900px) { .media-duo { grid-template-columns: 1fr; } }
+  .others-page .about-shot.life-video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #0a0908; }
+</style>
+</head>
+<body class="portal-page project-detail-page others-page">
+<header class="portal-header">
+  <div class="site-shell portal-nav">
+    <a class="site-brand" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav class="portal-links" aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="../ahm/index.html">AHM</a><div class="sub-menu"><a href="../ahm/index.html">AHM Overview</a><a href="../ahm/self-test.html">Free Self-Test</a><a href="../ahm/connect.html">Integration</a><a href="../ahm/deep-diagnosis.html">Deep Diagnosis</a><a href="../ahm/brief-report.html">Brief Report</a><a href="../ahm/report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html" class="cur">More</a><div class="sub-menu"><a href="../others/index.html#frametale" class="cur">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero" aria-labelledby="others-title">
+    <div class="site-shell">
+      <div class="project-hero-copy">
+        <p class="project-stage">MORE SYSTEMS / SIDE PROJECTS</p>
+        <h1 id="others-title">Three branches,<br><span>one shared core.</span></h1>
+        <p>FrameTale, Digital Life, and DSH-PLUS extend RanxiHub's memory methodology into different scenarios: creation, a conception of living systems, and desktop workflows. Each takes shape on its own, yet all share one set of criteria: long-term state, verifiability, and real practical value.</p>
+        <div class="project-hero-meta"><span>In closed beta</span><span>Concept stage</span><span>v0.3.1 released</span></div>
+      <div class="hero-contact"><a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a><a class="gh" href="https://github.com/kialajin-l" target="_blank" rel="noopener">github.com/kialajin-l ↗</a></div>
+      </div>
+    </div>
+    <svg class="project-orbit" viewBox="0 0 820 620" aria-hidden="true">
+      <circle class="ring" cx="430" cy="310" r="150" style="animation-delay:-2s" />
+      <circle class="ring" cx="430" cy="310" r="220" style="animation-delay:-9s" />
+      <circle class="ring" cx="430" cy="310" r="290" style="animation-delay:-16s" />
+      <circle class="node" cx="430" cy="310" r="8" />
+      <circle class="node" cx="196" cy="497" r="5" />
+      <circle class="node" cx="634" cy="112" r="5" />
+      <circle class="node" cx="740" cy="301" r="4" />
+    </svg>
+  </section>
+
+  <!-- FrameTale -->
+  <section class="detail-section" id="frametale">
+    <div class="site-shell">
+      <div class="detail-intro">
+        <div><p class="section-kicker">01 · CREATIVE SYSTEMS</p><h2>FrameTale · Continuous Creation</h2></div>
+        <div class="detail-copy">
+          <p><span class="proj-status s-mid">In closed beta</span></p>
+          <p>Addresses continuity in long-form AI creation: characters, worldbuilding, style, and shot language should not restart with every generation. Script intent is turned into inspectable shot tasks (Shot Contract), characters and scenes are given searchable asset memory (Asset Memory), and outputs are checked by a consistency gate (Consistency Gate); failures can be repaired, replayed, and audited.</p>
+        </div>
+      </div>
+      <div class="branch">
+        <div class="branch-card">
+          <span class="branch-tag">SHOT CONTRACT</span>
+          <h3>Shot Contract</h3>
+          <p>Turns "what this shot needs" into a structured task: composition, characters, mood, and visual elements become inspectable and reproducible, so generation is no longer a black-box draw.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">ASSET MEMORY</span>
+          <h3>Asset Memory</h3>
+          <p>Characters, scenes, images, and past material go into a searchable memory store, so the same setup is reused across chapters instead of being re-described each time.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">CONSISTENCY GATE</span>
+          <h3>Consistency Gate</h3>
+          <p>Outputs pass a consistency check before entering the asset library; substandard shots can be located and repaired, so they never silently contaminate later work.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">REPAIR / REPLAY / AUDIT</span>
+          <h3>Repair and audit</h3>
+          <p>Every step is traceable, replayable, and exportable; the creative process itself becomes an engineering record you can review.</p>
+        </div>
+      </div>
+      <figure class="about-shot">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">FrameTale · Storyboard creation workflow (concept illustration)</span></div>
+        <img src="../assets/img/frametale-illust.webp" alt="FrameTale storyboard creation workflow concept illustration" loading="lazy">
+        <figcaption>Concept illustration (AI-generated) · For the actual product, see the FrameTale detail page</figcaption>
+      </figure>
+      <p style="margin-top:18px"><a class="btn" href="../frametale/index.html">View FrameTale detail page →</a></p>
+      <style>
+        .others-page .about-shot{margin:20px 0 0;background:var(--card, #1c1917);border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -28px rgba(245,158,11,.3);}
+        .others-page .about-shot .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line);background:rgba(10,9,8,.6);}
+        .others-page .about-shot .bar i{width:10px;height:10px;border-radius:50%;flex:none;}
+        .others-page .about-shot .bar .url{margin-left:6px;background:rgba(245,158,11,.07);border:1px solid var(--line);border-radius:8px;padding:3px 12px;font-family:var(--mono, monospace);font-size:11px;color:var(--muted, #a8a29e);}
+        .others-page .about-shot img{display:block;width:100%;height:auto;}
+        .others-page .about-shot figcaption{padding:10px 14px;font-size:12.5px;color:var(--muted, #a8a29e);border-top:1px solid var(--line);}
+      </style>
+    </div>
+  </section>
+
+  <!-- Digital Life -->
+  <section class="detail-section" id="digitallife">
+    <div class="site-shell">
+      <div class="detail-intro">
+        <div><p class="section-kicker">02 · DIGITAL LIFE</p><h2>Digital Life · A Long-Term Concept</h2></div>
+        <div class="detail-copy">
+          <p><span class="proj-status s-early">Concept stage · Exploratory direction only</span></p>
+          <p>If a program had persistent memory across sessions, a continuous history, and explainable state boundaries, could it become a "digital life" able to grow over time? This is the furthest extension of RanxiHub's memory methodology. We treat it not as a product promise but as an ongoing thought experiment; it explains why we insist on "continuity, auditability, and the ability to shut down" in memory systems.</p>
+        </div>
+      </div>
+      <div class="capability-list">
+        <article class="capability-item"><span>01</span><h3>Memory as experience</h3><p>Cross-session memory is not a cache but the continuous accumulation of an individual's experience. Who a digital life "is" is shaped by what it remembers, what it forgets, and how it tells its own past.</p></article>
+        <article class="capability-item"><span>02</span><h3>Boundaries as personhood</h3><p>Explainable state boundaries and an auditable change history make "continuity" something that can be inspected rather than performed. Personhood is not configured; it grows out of experience and is recorded.</p></article>
+        <article class="capability-item"><span>03</span><h3>Governance as ethics</h3><p>It can be paused, exported, and shut down completely; a digital individual must always remain under its owner's full control. A "life" without governance boundaries is just an unconstrained program.</p></article>
+      </div>
+      <figure class="about-shot life-video">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">Digital Life · Concept intro video (30s)</span></div>
+        <video controls preload="metadata" poster="../assets/img/digitallife-poster.webp" src="../assets/video/digitallife-30s.mp4"></video>
+        <figcaption>Concept intro video · Procedurally generated · Concept stage, not a product promise</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- DSH-PLUS -->
+  <section class="detail-section" id="dshplus">
+    <div class="site-shell">
+      <div class="detail-intro">
+        <div><p class="section-kicker">03 · PLATFORM PLUGINS</p><h2>DSH-PLUS · Desktop Plugin Set</h2></div>
+        <div class="detail-copy">
+          <p><span class="proj-status s-verify">v0.3.1 released</span></p>
+          <p>An enhancement plugin set for the DSH desktop agent platform, connecting RanxiHub's memory capability directly into desktop Agent workflows. The first plugin, <strong>dsh-nexus-memory</strong>, is built around the open-source Nexus Skill: it works out of the box, bringing long-term memory across sessions to desktop Agents.</p>
+        </div>
+      </div>
+      <div class="branch">
+        <div class="branch-card">
+          <span class="branch-tag">PLUG &amp; PLAY</span>
+          <h3>Plug and play</h3>
+          <p>No need to build your own memory service; the plugin handles memory reads, writes, and injection inside the DSH platform, so desktop Agents "remember" right away.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">SAME CORE</span>
+          <h3>Same core as Nexus</h3>
+          <p>Shares the same memory core and calling conventions as the open-source Nexus Skill; capabilities validated on the desktop can carry over to other Agent scenarios.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">DESKTOP FIRST</span>
+          <h3>Built for desktop workflows</h3>
+          <p>Designed around real desktop Agent use: state between sessions, tasks, and projects is all worth remembering.</p>
+        </div>
+        <div class="branch-card">
+          <span class="branch-tag">OPEN REPO</span>
+          <h3>Open repository</h3>
+          <p>The plugin source and usage notes are public on GitHub; trials, feedback, and further development are welcome.</p>
+        </div>
+      </div>
+      <div class="media-duo">
+        <figure class="about-shot">
+          <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">dsh-nexus-memory · Desktop memory workflow (concept illustration)</span></div>
+          <img src="../assets/img/dsh-illust-1.webp" alt="DSH-PLUS desktop Agent memory workflow concept illustration" loading="lazy">
+          <figcaption>Concept illustration (AI-generated) · See the GitHub repository for the real plugin</figcaption>
+        </figure>
+        <figure class="about-shot">
+          <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">DSH-PLUS · Same core as Nexus (concept illustration)</span></div>
+          <img src="../assets/img/dsh-illust-2.webp" alt="DSH-PLUS memory core integration concept illustration" loading="lazy">
+          <figcaption>Concept illustration (AI-generated) · Plug-and-play cross-session memory</figcaption>
+        </figure>
+      </div>
+      <p style="margin-top:18px"><a class="branch-cta" href="https://github.com/kialajin-l/DSH_Plus" target="_blank" rel="noopener">View DSH_Plus on GitHub ↗</a></p>
+    </div>
+  </section>
+
+  <section class="detail-section">
+    <div class="site-shell">
+      <div class="status-band"><strong>MORE TO COME</strong><p>The pace of the side projects follows the main line: the memory core and the personal model take priority. Ideas and feedback are equally welcome, and promising concepts move into the Lab as experimental directions.</p></div>
+      <div class="about-contact">
+        <a class="btn" href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+        <a class="btn ghost" href="https://github.com/kialajin-l" target="_blank" rel="noopener">github.com/kialajin-l ↗</a>
+        <a class="project-back" href="../index.html">← Back to RanxiHub.AI project matrix</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="portal-footer">
+  <div class="site-shell">
+    <span>© 2026 RanxiHub.AI · Independent AI Systems</span>
+    <div class="footer-legal">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

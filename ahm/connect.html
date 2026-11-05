@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.AHM Integration — Four Agent integration paths and security boundaries.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · AHM Integration</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  
+  
+  .nav a:hover{color:var(--brand);}
+  .head{padding:34px 0 8px;}
+  .head h1{font-size:24px;font-weight:800;}
+  .head p{color:var(--mut);font-size:14px;margin-top:6px;}
+  .planned{background:#fff7ed8e1;border:1px solid rgba(251,191,36,.35);border-radius:10px;padding:14px 16px;font-size:13px;color:#fbbf24;margin:18px 0;}
+  .planned b{color:#fbbf24;}
+  .m{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .m h3{font-size:16px;margin-bottom:6px;}
+  .m .bd{font-size:13px;color:var(--mut);margin-top:6px;}
+  .m .bd b{color:var(--brand-d);}
+  .step{font-size:14px;margin:4px 0;}
+  .field{background:#14100d;border-radius:8px;padding:10px 14px;font-size:13px;margin-top:8px;}
+  .field code{background:#14100d;padding:1px 6px;border-radius:4px;font-size:12px;}
+  h2{font-size:17px;font-weight:800;margin:26px 0 12px;}
+  .safe{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:14px 16px;font-size:13px;margin:16px 0;}
+  .safe ul{margin:6px 0 0 18px;}
+  .cta{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:22px;text-align:center;margin:28px 0;}
+  .btn{display:inline-block;padding:12px 26px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:.15s;margin:6px;}
+  .btn-p{background:var(--brand);color:#fff;}
+  .btn-p:hover{background:var(--brand-d);}
+  .btn-o{background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);}
+  .btn-o:hover{background:rgba(245,158,11,.10);}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--mut);font-size:12px;text-align:center;margin-top:30px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="index.html" class="cur">AHM</a><div class="sub-menu"><a href="index.html">AHM Overview</a><a href="self-test.html">Free Self-Test</a><a href="connect.html" class="cur">Integration</a><a href="deep-diagnosis.html">Deep Diagnosis</a><a href="brief-report.html">Brief Report</a><a href="report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Choose an Agent integration method</h1>
+    <p>This page collects only the "integration type" and no credentials. Once the Connector is available, probes run locally in <strong>your own environment</strong>; AHM receives only low-sensitivity summaries.</p>
+  </div>
+
+  <div class="planned">⏳ <b>Local Connector in development (planned)</b> — This page is a pre-launch preview; only the planned download and run steps are shown here, and the Connector <b>is not yet available for download</b>. The real probes (Evidence-lite / Deep Local) are implemented separately; this page does not present them as available.</div>
+
+  <h2>Four integration methods</h2>
+  <p style="font-size:13px;color:var(--mut);margin-bottom:14px;">These are the planned integration methods for after the Connector is released; none are available yet.</p>
+
+  <div class="m">
+    <h3>① OpenAI-compatible HTTP</h3>
+    <div class="step">User action: configure a local endpoint; provide credentials via <strong>environment variables</strong>.</div>
+    <div class="bd">Evidence boundary: the Connector calls locally on your machine; <b>only summaries are output</b>, and raw conversations and credentials never leave your machine.</div>
+  </div>
+
+  <div class="m">
+    <h3>② Local Agent / CLI</h3>
+    <div class="step">User action: specify a local command or adapter.</div>
+    <div class="bd">Evidence boundary: a fixed allowlist is required; <b>arbitrary remote commands are not accepted</b>.</div>
+  </div>
+
+  <div class="m">
+    <h3>③ Pre-redacted samples</h3>
+    <div class="step">User action: upload samples you have already redacted yourself.</div>
+    <div class="bd">Evidence boundary: labelled <b>self_reported</b>; not equivalent to real probe results.</div>
+  </div>
+
+  <div class="m">
+    <h3>④ No integration</h3>
+    <div class="step">User action: complete the questionnaire only.</div>
+    <div class="bd">Evidence boundary: generates triage candidates only; <b>no diagnostic conclusion is produced</b>.</div>
+  </div>
+
+  <h2>Connector planned fields</h2>
+  <div class="field">
+    A future Connector is planned to generate and return: <code>checkup_id</code> (a unique identifier for one checkup), <code>evidence_level</code> (limited_probe / deep_local), and <code>completed_probe_count / requested_probe_count</code> (number of completed probes). The page displays only these low-sensitivity summary fields and does not accept raw logs.
+  </div>
+
+  <div class="safe">
+    <b>Security boundaries</b>
+    <ul>
+      <li>The browser does not store or upload API keys — credentials live only in your local environment variables;</li>
+      <li>The Connector calls <strong>your own Agent</strong> on your machine and redacts data locally;</li>
+      <li>No raw logs, prompts, credentials, or full conversations are uploaded;</li>
+      <li>AHM does not execute your Agents, does not expose a public HTTP endpoint, and is not connected to billing or production operations;</li>
+      <li>Diagnostic summaries and contact details are <strong>submitted separately</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <p style="font-size:15px;margin-bottom:12px;">After you complete the self-test and choose an integration method, you can generate an Evidence-lite brief report (sample).</p>
+    <a class="btn btn-p" href="self-test.html">Take the free self-test</a>
+    <a class="btn btn-o" href="brief-report.html">View the brief report template (DEMO)</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — The integration page collects only type information; the Local Connector download and run steps are planned and will be released separately once available.</div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

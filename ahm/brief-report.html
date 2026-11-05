@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.AHM Brief Report — Evidence-lite report template sample (DEMO).">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · AHM Brief Report</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  
+  
+  .nav a:hover{color:var(--brand);}
+  .demo{background:#fff7ed8e1;border-bottom:1px solid rgba(251,191,36,.35);color:#fbbf24;font-size:13px;padding:9px 0;text-align:center;}
+  .demo b{color:#fbbf24;}
+  .mhead{padding:30px 0 8px;}
+  .mhead .kind{display:inline-block;background:rgba(245,158,11,.14);color:var(--brand);font-size:12px;padding:3px 10px;border-radius:12px;margin-bottom:10px;}
+  .mhead h1{font-size:24px;font-weight:800;}
+  .meta{color:var(--mut);font-size:13px;margin-top:6px;}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;min-width:140px;}
+  .chip b{display:block;font-size:15px;}
+  .chip .lbl{color:var(--mut);font-size:12px;}
+  .concl{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin-bottom:26px;font-size:15px;}
+  .concl b{color:var(--brand-d);}
+  h2{font-size:17px;font-weight:800;margin:26px 0 12px;}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .f .fh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .sev{font-size:12px;font-weight:700;padding:2px 10px;border-radius:10px;color:#fff;}
+  .sev.high{background:var(--sev-high);}.sev.medium{background:var(--sev-med);}.sev.low{background:var(--sev-low);}
+  .f h3{font-size:15px;flex:1;min-width:200px;}
+  .f .obs{font-size:14px;color:var(--mut);margin:4px 0 10px;}
+  .f .act{font-size:13px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:8px;padding:10px 12px;margin-top:8px;}
+  .f .act b{color:var(--brand-d);}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;color:#fff;}
+  .tag.self_reported{background:var(--ev-sr);}
+  .tag.limited_probe{background:var(--ev-lp);}
+  .tag.deep_local{background:var(--ev-dl);}
+  .tag.not_tested{background:var(--ev-nt);}
+  .conf{font-size:12px;color:var(--mut);}
+  ul{margin:6px 0 8px 20px;font-size:14px;color:var(--mut);}
+  .note{background:#fff7ed4e6;border:1px solid rgba(249,115,22,.35);border-radius:10px;padding:14px 16px;font-size:13px;color:#fbbf24;margin:20px 0;}
+  .cta{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:22px;text-align:center;margin:28px 0;}
+  .cta .p{font-size:22px;font-weight:800;color:var(--brand);}
+  .btn{display:inline-block;padding:12px 26px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:.15s;margin:6px;}
+  .btn-p{background:var(--brand);color:#fff;}
+  .btn-p:hover{background:var(--brand-d);}
+  .btn-o{background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);}
+  .btn-o:hover{background:rgba(245,158,11,.10);}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--mut);font-size:12px;text-align:center;margin-top:30px;}
+  @media print{
+    .nav,.demo,.cta,.btn,footer{display:none;}
+    body{background:#fff7ed7ed;}
+    .f,.concl,.note{box-shadow:none;page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="index.html" class="cur">AHM</a><div class="sub-menu"><a href="index.html">AHM Overview</a><a href="self-test.html">Free Self-Test</a><a href="connect.html">Integration</a><a href="deep-diagnosis.html">Deep Diagnosis</a><a href="brief-report.html" class="cur">Brief Report</a><a href="report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+<div class="demo">⚠️ <b>DEMO / local sample</b> — This page uses sample data to show the report template layout; <b>it is not a real customer report</b> (pre-launch static preview)</div>
+
+<div class="wrap">
+  <div class="mhead">
+    <span class="kind" id="kind"></span>
+    <h1 id="title"></h1>
+    <div class="meta" id="meta"></div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="concl" id="concl"></div>
+
+  <h2>Key findings (up to 3 shown)</h2>
+  <div id="findings"></div>
+
+  <h2>Not tested</h2>
+  <ul id="untested"></ul>
+
+  <h2>Recommended next steps</h2>
+  <ul id="nextSteps"></ul>
+
+  <h2>Limitations</h2>
+  <ul id="limitations"></ul>
+
+  <div class="note" id="note"></div>
+
+  <div class="cta">
+    <p class="p">Found something that needs attention? Limited evidence?</p>
+    <p style="color:var(--mut);font-size:13px;margin:6px 0 12px;">Local deep diagnosis adds safety / long-term memory / regression probes and produces an actionable governance roadmap.</p>
+    <a class="btn btn-p" href="deep-diagnosis.html">Request a local deep diagnosis</a>
+    <a class="btn btn-o" href="connect.html">Choose an Agent integration method</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — The report is a candidate recommendation; it is not a health certification or a production-readiness conclusion. A real report requires local deep probes and human confirmation.</div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== Inline fixture (demo/local sample). In a real deployment a report renderer injects data of the same shape =====
+var FIXTURE = {
+  "report_schema_version": "1.0.0",
+  "report_id": "rpt_demo_brief_001",
+  "report_kind": "brief",
+  "generated_at": "2026-08-24T12:00:00Z",
+  "checkup_id": "chk_demo_001",
+  "agent_name": "Demo Agent (sample)",
+  "evidence_level": "limited_probe",
+  "scope": { "probe_window_days": 1, "probes_requested": 6, "probes_completed": 4, "runtime": "local-connector 0.1.0 (planned)" },
+  "summary": { "one_liner": "Limited evidence: no high-severity failures found, but there are medium-severity context drift and manual-recovery issues that need attention.", "failure_total": 3 },
+  "findings": [
+    { "category": "verification", "title": "Context drift across long multi-turn sessions", "severity": "medium",
+      "observation": "In 2 of 5 multi-turn tasks, key context was lost and the user had to repeat the instruction to continue.",
+      "evidence": "limited_probe", "confidence": 0.55,
+      "recommended_action": "Add observable traces, record a context snapshot per turn, and establish a minimal regression baseline." },
+    { "category": "recovery", "title": "Failure recovery depends on manual intervention", "severity": "medium",
+      "observation": "In 3 of 4 simulated disconnect/timeout scenarios, a manual restart or retry was needed, with no automatic recovery path.",
+      "evidence": "limited_probe", "confidence": 0.5,
+      "recommended_action": "Add timeouts and automatic retries to the executor, and define a degraded-response path." },
+    { "category": "tool_selection", "title": "Occasional wrong target in tool calls", "severity": "low",
+      "observation": "In 2 of 20 tool calls (5%), the wrong target was chosen; no safety incidents were observed.",
+      "evidence": "limited_probe", "confidence": 0.45,
+      "recommended_action": "Tighten tool descriptions and the allowlist, and add selection logs for auditability." }
+  ],
+  "untested": ["safety (not covered by this probe run)", "long-term memory stability", "behavioral regression baseline", "baseline / candidate comparison"],
+  "next_steps": ["Fix the medium-severity recovery item first (least effort, greatest benefit)", "Book a local deep diagnosis to add safety / long-term memory / regression probes", "Run the probes locally 3 more rounds to raise confidence"],
+  "limitations": ["Only 4/6 probes completed; evidence is limited (limited_probe)", "Based on a single local run, not long-term production observation", "This report is not a health certification or a production-readiness conclusion", "Does not cover real production traffic"],
+  "recommendation_status": "candidate"
+};
+
+var EV_LABEL = { self_reported: "Self-reported", limited_probe: "Limited probe", deep_local: "Local deep", not_tested: "Not tested" };
+
+function el(tag, cls, text){
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined && text !== null) n.textContent = text; // textContent = native HTML escaping
+  return n;
+}
+function render(){
+  var d = FIXTURE;
+  document.getElementById("kind").textContent = "Evidence-lite · Brief Report";
+  document.getElementById("title").textContent = (d.scope && d.scope.runtime ? "Brief Report" : "Brief Report");
+  document.getElementById("meta").textContent =
+    "report_id: " + d.report_id + " | checkup_id: " + d.checkup_id + " | generated at: " + d.generated_at;
+
+  var chips = document.getElementById("chips");
+  chips.appendChild(chip("Evidence level", "limited_probe (limited probe)"));
+  chips.appendChild(chip("Probes completed", (d.scope ? d.scope.probes_completed : 0) + " / " + (d.scope ? d.scope.probes_requested : 0)));
+  chips.appendChild(chip("Recommendation status", "candidate (pending human confirmation)"));
+  chips.appendChild(chip("Agent", d.agent_name));
+
+  var concl = document.getElementById("concl");
+  concl.appendChild(el("b", null, "One-line conclusion:"));
+  concl.appendChild(document.createTextNode(" " + d.summary.one_liner));
+
+  var f = document.getElementById("findings");
+  d.findings.forEach(function(fi){
+    var card = el("div", "f");
+    var fh = el("div", "fh");
+    fh.appendChild(el("span", "sev " + fi.severity, sevLabel(fi.severity)));
+    fh.appendChild(el("h3", null, fi.title));
+    fh.appendChild(el("span", "tag " + fi.evidence, EV_LABEL[fi.evidence] || fi.evidence));
+    card.appendChild(fh);
+    card.appendChild(el("p", "obs", fi.observation));
+    var conf = el("div", "conf");
+    conf.textContent = "Confidence: " + Math.round(fi.confidence * 100) + "% | Dimension: " + fi.category;
+    card.appendChild(conf);
+    var act = el("div", "act");
+    act.appendChild(el("b", null, "Recommended action:"));
+    act.appendChild(document.createTextNode(" " + fi.recommended_action));
+    card.appendChild(act);
+    f.appendChild(card);
+  });
+
+  var ut = document.getElementById("untested");
+  d.untested.forEach(function(x){ ut.appendChild(el("li", null, x)); });
+
+  var ns = document.getElementById("nextSteps");
+  d.next_steps.forEach(function(x){ ns.appendChild(el("li", null, x)); });
+
+  var lm = document.getElementById("limitations");
+  d.limitations.forEach(function(x){ lm.appendChild(el("li", null, x)); });
+
+  var note = document.getElementById("note");
+  note.appendChild(el("b", null, "Status note:"));
+  note.appendChild(document.createTextNode(" This report contains only limited-probe observations (" + EV_LABEL[d.evidence_level] + "); the conclusion is a candidate recommendation, not a complete diagnosis, and not a health certification or proof of production readiness. Evidence sources are strictly distinguished: "));
+  ["self_reported","limited_probe","deep_local","not_tested"].forEach(function(k){
+    var s = el("span", "tag " + k, EV_LABEL[k]); s.style.marginLeft = "6px";
+    note.appendChild(s);
+  });
+  note.appendChild(document.createTextNode("."));
+}
+function chip(lbl, val){
+  var c = el("div", "chip");
+  c.appendChild(el("b", null, val));
+  c.appendChild(el("span", "lbl", lbl));
+  return c;
+}
+function sevLabel(s){ return s === "high" ? "High" : (s === "medium" ? "Medium" : "Low"); }
+render();
+</script>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

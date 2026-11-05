@@ -1,0 +1,38 @@
+/* ============================================================
+   RanxiHub.AI - shared reveal layer (ahm/*, dllm, frametale, about).
+   Elements are hidden only after JS adds html.motion-ready; without JS everything is visible.
+   ============================================================ */
+
+html.motion-ready .mrv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.22, .61, .36, 1), transform .7s cubic-bezier(.22, .61, .36, 1);
+  transition-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+html.motion-ready .mrv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reading progress bar (injected by JS as .motion-progress). */
+.motion-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 99;
+  pointer-events: none;
+  background: linear-gradient(90deg, #f59e0b, #fb7185);
+  transition: width .1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready .mrv {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .motion-progress { display: none; }
+}

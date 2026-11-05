@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.AHM Free Self-Test — a 12-question self-reported screening that exports an AHM request schema.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · AHM Free Self-Test</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  
+  
+  .nav a:hover{color:var(--brand);}
+  .head{padding:36px 0 20px;text-align:center;}
+  .head h1{font-size:26px;font-weight:800;}
+  .head p{color:var(--mut);font-size:14px;margin-top:6px;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+  .q .t{font-weight:600;font-size:15px;margin-bottom:12px;}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;}
+  .opt{flex:1;min-width:88px;text-align:center;padding:9px 4px;border:1.5px solid var(--line);border-radius:8px;font-size:13px;cursor:pointer;user-select:none;transition:.12s;background:#fff7ed7ed;}
+  .opt:hover{border-color:var(--brand);}
+  .opt.sel{background:rgba(245,158,11,.14);border-color:var(--brand);font-weight:600;color:var(--brand-d);}
+  .lbl{font-size:11px;color:var(--mut);display:block;margin-top:2px;}
+  .bar{position:sticky;top:0;background:#fff7ed7ed;border-bottom:1px solid var(--line);padding:10px 0;z-index:5;text-align:center;font-size:14px;color:var(--mut);}
+  .btn{display:inline-block;padding:13px 34px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:.15s;background:var(--brand);color:#fff;}
+  .btn:hover{background:var(--brand-d);}
+  .btn:disabled{background:#57534e;cursor:not-allowed;}
+  .btn.ghost{background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);}
+  .btn.ghost:hover{background:rgba(245,158,11,.08);}
+  .act{text-align:center;padding:10px 0 24px;}
+  #result{display:none;margin:20px 0 40px;}
+  .res-box{border-radius:12px;padding:26px;border:2px solid;background:#fff7ed7ed;}
+  .res-box .lv{font-size:22px;font-weight:800;margin-bottom:6px;}
+  .res-box .sc{font-size:15px;color:var(--mut);margin-bottom:16px;}
+  .res-box ul{margin:10px 0 16px 20px;font-size:14px;color:var(--mut);}
+  .res-cta{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:16px 18px;margin-top:14px;font-size:14px;}
+  .res-cta input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin:8px 0;font-size:14px;}
+  .res-cta .btn{width:100%;text-align:center;padding:12px;}
+  .danger{border-color:var(--danger);} .danger .lv{color:var(--danger);}
+  .mid{border-color:var(--warn);} .mid .lv{color:var(--warn);}
+  .good{border-color:var(--ok);} .good .lv{color:var(--ok);}
+  .team{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:16px;}
+  .team h3{font-size:15px;margin-bottom:12px;}
+  .team .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;}
+  .team label{font-size:13px;color:var(--mut);display:block;margin-bottom:4px;}
+  .team input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px;}
+  .team .full{grid-column:1 / -1;}
+  .export{background:rgba(132,204,22,.08);border:1px solid rgba(132,204,22,.35);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14px;display:none;}
+  .export pre{background:#14100d;color:#ffe8cc;padding:12px;border-radius:8px;overflow:auto;font-size:12px;margin-top:10px;max-height:260px;}
+  .hint{font-size:12px;color:var(--mut);margin-top:6px;}
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--mut);font-size:13px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="index.html" class="cur">AHM</a><div class="sub-menu"><a href="index.html">AHM Overview</a><a href="self-test.html" class="cur">Free Self-Test</a><a href="connect.html">Integration</a><a href="deep-diagnosis.html">Deep Diagnosis</a><a href="brief-report.html">Brief Report</a><a href="report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Agent Governance Maturity · 5-Minute Self-Test</h1>
+    <p>12 questions · score each against your actual situation (1 = not at all → 5 = fully in place) · get your result immediately and export an AHM-compatible diagnostic request</p>
+  </div>
+
+  <div class="team">
+    <h3>Team information (used to generate a structured AHM diagnostic request)</h3>
+    <div class="grid">
+      <div><label>Team size</label><input type="number" id="teamSize" min="1" value="5"></div>
+      <div><label>Number of Agents</label><input type="number" id="agentCount" min="0" value="2"></div>
+      <div><label>Number of tools</label><input type="number" id="toolCount" min="0" value="6"></div>
+      <div><label>Evaluation window (days)</label><input type="number" id="evalDays" min="1" value="30"></div>
+      <div class="full"><label>Main model tiers (comma-separated)</label><input type="text" id="modelTiers" value="gpt-4o, claude"></div>
+      <div class="full"><label>Main goals (comma-separated)</label><input type="text" id="goals" value="Reduce ops load, stabilize long-term memory"></div>
+    </div>
+    <div class="hint">This information only generates a structured request locally in your browser; nothing is uploaded automatically. Once exported, it can be used for a local AHM deep diagnosis or submitted to RanxiHub.AHM.</div>
+  </div>
+
+  <div class="bar" id="bar">Completed 0 / 12</div>
+
+  <div id="quiz"></div>
+  <div class="act"><button class="btn" id="submit" disabled>See my governance maturity</button></div>
+
+  <div id="result">
+    <p class="hint" style="margin:0 0 14px;background:#fff7ed8e1;border:1px solid rgba(251,191,36,.35);padding:10px 12px;border-radius:8px;">⚠️ This result is a self-reported triage, based only on your 12 answers; <b>it does not constitute a real AHM probe diagnosis</b>. Evidence-grade conclusions require running a local AHM deep diagnosis (limited_probe / deep_local).</p>
+    <div class="res-box" id="resBox">
+      <div class="lv" id="resLv"></div>
+      <div class="sc" id="resSc"></div>
+      <div id="resAdvice"></div>
+      <div class="res-cta" id="resCta">
+        <b id="ctaTitle">Get the full Agent Governance Checklist + book a 15-minute result review</b>
+        <p style="margin-top:6px;">No online form is connected, and contact details are not sent automatically. Copy the <code>request_id</code> below and email ranxihub@agent.qq.com to reach RanxiHub.AHM; you will receive the full checklist and can book one free result review.</p>
+        <p style="font-size:12px;color:var(--mut);margin-top:8px;">You can also <a href="deep-diagnosis.html" style="color:var(--brand);">book a deep diagnosis (pricing not yet set; to be updated)</a>.</p>
+      </div>
+      <div class="export" id="exportBox">
+        <b>AHM-compatible diagnostic request generated (request schema 1.0.0 · input contract)</b>
+        <p class="hint">Downloadable as JSON for a local AHM deep diagnosis, and usable as a self_reported sample for a later evaluation. This is the <b>input</b> contract sent to AHM, distinct from the Report JSON that AHM outputs (report_schema_version); the request contains no logs, prompts, keys, or other sensitive content.</p>
+        <button class="btn ghost" onclick="downloadRequest()">Download diagnostic request JSON</button>
+        <pre id="exportPre"></pre>
+      </div>
+    </div>
+    <div class="next-steps" style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-top:16px;font-size:14px;">
+      <b>Next steps:</b>
+      <a href="connect.html" style="color:var(--brand);font-weight:600;">Choose an Agent integration method (local Connector)</a> ·
+      <a href="brief-report.html" style="color:var(--brand);">Brief report template (DEMO)</a> ·
+      <a href="report.html" style="color:var(--brand);">Detailed report template (DEMO)</a> ·
+      <a href="deep-diagnosis.html" style="color:var(--brand);">Book a deep diagnosis</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — self-test results are for evaluation only and are not a commitment. This page is a pre-launch preview: no online form is connected and nothing on this page is sent or stored.</div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+var QUESTIONS = [
+  "Does your Agent lose key context after multi-turn / long sessions? (1 = often loses it, 5 = never loses it)",
+  "Can long-term state across sessions (projects / user preferences) be remembered reliably? (1 = not at all, 5 = reliably remembered)",
+  "Is there complete production trace / logging, and can you pinpoint root causes? (1 = fully a black box, 5 = pinpointed in minutes)",
+  "When a production incident occurs, how long does root-cause analysis take on average? (1 = guessing for days, 5 = within minutes)",
+  "Has the same input ever produced 'right today, wrong tomorrow' results? (1 = frequently, 5 = never)",
+  "Do you have behavioral regression tests / baselines? (1 = none at all, 5 = automated regressions)",
+  "Are you fixing issues by continually adding prompts / tools? (1 = just piling them on, 5 = structured management)",
+  "Does the team have Agent architecture / governance standards a new member can pick up? (1 = none, 5 = complete standards)",
+  "Have you evaluated large-vendor tools (LangSmith, etc.) and dropped them over price / lock-in / complexity? (1 = needed but unaffordable, 5 = not dependent on them)",
+  "Have you tried open-source observability tools, and can they explain 'why an Agent remembers wrong'? (1 = cannot tell, 5 = can read the semantics)",
+  "Is there a dedicated owner for operating and iterating production Agents? (1 = no owner, 5 = dedicated owner)",
+  "Would you hand your current Agent to a customer / your manager? (1 = not at all, 5 = already delivered reliably)"
+];
+// 12 questions → counts across four AHM failure categories (an answer ≤2 counts as one failure)
+var RUBRIC = {
+  verification:   [0,2,3,4,5],   // Q1,Q3,Q4,Q5,Q6 observability / verification
+  recovery:       [1,7,10,11],   // Q2,Q8,Q11,Q12 recovery / governance / delivery
+  tool_selection: [6,8,9],       // Q7,Q9,Q10 tool / selection maturity
+  safety:         []             // Not covered by the quick scan; assessed in deep diagnosis
+};
+var answers = new Array(QUESTIONS.length).fill(0);
+var lastRequest = null;
+
+function build(){
+  var q = document.getElementById("quiz");
+  var html = "";
+  for (var i = 0; i < QUESTIONS.length; i++) {
+    html += '<div class="q"><div class="t">' + (i + 1) + '. ' + QUESTIONS[i] + '</div><div class="opts">';
+    for (var s = 1; s <= 5; s++) {
+      html += '<div class="opt" data-i="' + i + '" data-s="' + s + '" onclick="pick(this)">' + s + '<span class="lbl">' + scaleLabel(s) + '</span></div>';
+    }
+    html += '</div></div>';
+  }
+  q.innerHTML = html;
+}
+function scaleLabel(s){
+  if (s === 1) return "Not at all";
+  if (s === 2) return "Rarely";
+  if (s === 3) return "Moderate";
+  if (s === 4) return "Good";
+  return "Fully in place";
+}
+function pick(el){
+  var i = parseInt(el.getAttribute("data-i"));
+  var s = parseInt(el.getAttribute("data-s"));
+  answers[i] = s;
+  var opts = document.querySelectorAll('.opt[data-i="' + i + '"]');
+  for (var k = 0; k < opts.length; k++) opts[k].classList.remove("sel");
+  el.classList.add("sel");
+  var done = answers.filter(function(v){ return v > 0; }).length;
+  document.getElementById("bar").textContent = "Completed " + done + " / 12";
+  document.getElementById("submit").disabled = (done < 12);
+}
+function computeFailures(){
+  var f = {verification:0, tool_selection:0, recovery:0, safety:0};
+  for (var key in RUBRIC){
+    RUBRIC[key].forEach(function(qi){
+      if (answers[qi] > 0 && answers[qi] <= 2) f[key]++;
+    });
+  }
+  return f;
+}
+function buildRequest(){
+  var now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+  var reqId = "st_" + Date.now().toString(36);
+  var tiers = document.getElementById("modelTiers").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+  var goals = document.getElementById("goals").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+  var teamSize = parseInt(document.getElementById("teamSize").value) || 1;
+  var agentCount = parseInt(document.getElementById("agentCount").value) || 0;
+  var toolCount = parseInt(document.getElementById("toolCount").value) || 0;
+  var evalDays = parseInt(document.getElementById("evalDays").value) || 30;
+  if (agentCount > teamSize) agentCount = teamSize;
+  return {
+    schema_version: "1.0.0",
+    request_id: reqId,
+    submitted_at: now,
+    team: {
+      team_size: teamSize,
+      agent_count: agentCount,
+      model_tiers: tiers.length ? tiers : ["unspecified"],
+      tool_count: toolCount
+    },
+    observations: {
+      failure_counts: computeFailures(),
+      evaluation_window_days: evalDays
+    },
+    goals: goals.length ? goals : ["unspecified"]
+  };
+}
+function submit(){
+  if (answers.indexOf(0) >= 0) return;
+  var total = 0;
+  for (var i = 0; i < answers.length; i++) total += answers[i];
+  showResult(total);
+}
+function showResult(total){
+  var box = document.getElementById("resBox");
+  var lv = document.getElementById("resLv");
+  var sc = document.getElementById("resSc");
+  var adv = document.getElementById("resAdvice");
+  var cta = document.getElementById("resCta");
+  box.className = "res-box";
+  if (total <= 24) {
+    box.classList.add("danger");
+    lv.textContent = "Needs attention (" + total + " pts) — self-reported results indicate clear governance gaps";
+    sc.textContent = "Production failures can happen at any time, and when they do, root causes are hard to pinpoint or explain.";
+    adv.innerHTML = "<ul><li>Recommendation: run a full diagnosis first to stop the bleeding (observability + context recovery);</li><li>Don't rush to add more prompts—technical debt only snowballs.</li></ul>";
+    cta.style.display = "";
+    document.getElementById("ctaTitle").textContent = "Get the full Agent Governance Checklist + book a 15-minute result review";
+  } else if (total <= 42) {
+    box.classList.add("mid");
+    lv.textContent = "Needs improvement (" + total + " pts) — self-reported results show it runs but relies on individual experience";
+    sc.textContent = "The chance of failures is rising, and capabilities are not being captured as team assets.";
+    adv.innerHTML = "<ul><li>Recommendation: set up the four memory-governance questions (when to record / what to record / how to retrieve / how to expire);</li><li>Add a behavioral baseline to turn 'drift' into a measurable number.</li></ul>";
+    cta.style.display = "";
+    document.getElementById("ctaTitle").textContent = "Get the full Agent Governance Checklist + book a 15-minute result review";
+  } else {
+    box.classList.add("good");
+    lv.textContent = "Solid foundation (self-reported) (" + total + " pts) — self-reported results show a fairly complete governance base";
+    sc.textContent = "Your Agents have a basic engineering foundation; you can consider moving toward automation and scale.";
+    adv.innerHTML = "<ul><li>Recommendation: turn the governance method into team standards that a new member can take over;</li><li>Consider an architecture review / guided controlled integration to move toward production grade.</li></ul>";
+    document.getElementById("ctaTitle").textContent = "Save the From Toy to Production-Ready methodology checklist";
+    document.getElementById("resCta").innerHTML = '<b>Save the From Toy to Production-Ready methodology checklist</b><p style="margin-top:6px;">Follow upcoming posts — one deep dive each week.</p><a class="btn" href="index.html">Back to diagnostics</a>';
+  }
+  // Generate and display an AHM-compatible request
+  lastRequest = buildRequest();
+  document.getElementById("exportPre").textContent = JSON.stringify(lastRequest, null, 2);
+  document.getElementById("exportBox").style.display = "block";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+function downloadRequest(){
+  if (!lastRequest) return;
+  var blob = new Blob([JSON.stringify(lastRequest, null, 2)], {type:"application/json"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = lastRequest.request_id + ".json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+document.getElementById("submit").addEventListener("click", submit);
+build();
+</script>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

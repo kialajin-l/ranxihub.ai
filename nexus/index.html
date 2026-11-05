@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.Nexus — A local-first, auditable long-term memory product system: open-source Skill, DSH plugin, and commercial edition.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · Nexus Long-Term Memory Products</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;overflow-x:hidden;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;}
+  header .wrap{max-width:1200px;}
+  header{border-bottom:1px solid var(--line);position:relative;z-index:2;}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  .nav a:hover{color:var(--brand);}
+  .nav a.cur{color:var(--brand);font-weight:700;}
+
+  /* ===== Ambient background: grid + floating glow ===== */
+  body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background-image:linear-gradient(rgba(245,158,11,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,.035) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 20%,transparent 80%);
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 20%,transparent 80%);}
+  .bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;will-change:transform;}
+  .o1{width:560px;height:560px;top:-160px;right:-140px;background:radial-gradient(circle,rgba(245,158,11,.17),transparent 68%);animation:drift1 19s ease-in-out infinite;}
+  .o2{width:460px;height:460px;top:36%;left:-180px;background:radial-gradient(circle,rgba(251,113,133,.13),transparent 68%);animation:drift2 24s ease-in-out infinite;}
+  .o3{width:420px;height:420px;bottom:-160px;right:16%;background:radial-gradient(circle,rgba(251,191,36,.10),transparent 68%);animation:drift1 28s ease-in-out infinite reverse;}
+  @keyframes drift1{50%{transform:translate(-70px,60px) scale(1.1);}}
+  @keyframes drift2{50%{transform:translate(80px,-50px) scale(1.06);}}
+
+  /* ===== Top reading progress bar ===== */
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--brand),#fb7185);z-index:50;transition:width .1s linear;}
+
+  /* ===== Scroll reveal system ===== */
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.22,.61,.36,1),transform .75s cubic-bezier(.22,.61,.36,1);transition-delay:var(--d,0s);}
+  .rv.in{opacity:1;transform:none;}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 34px;position:relative;}
+  .hero .crumb{font-size:13px;color:var(--mut);margin-bottom:14px;letter-spacing:.06em;}
+  .hero .tag{display:inline-block;background:rgba(245,158,11,.14);color:var(--brand);font-size:13px;padding:4px 13px;border-radius:20px;margin-bottom:16px;animation:breath 3.6s ease-in-out infinite;}
+  @keyframes breath{50%{box-shadow:0 0 18px rgba(245,158,11,.28);background:rgba(245,158,11,.2);}}
+  .hero h1{font-size:34px;font-weight:800;line-height:1.4;max-width:920px;}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,#f59e0b,#fb7185,#fbbf24,#f59e0b);background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite;}
+  @keyframes shine{to{background-position:280% 0;}}
+  .hero p.lead{color:var(--mut);font-size:16px;margin-top:16px;max-width:840px;}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--mut);transition:transform .3s,border-color .3s,color .3s;}
+  .chip:hover{transform:translateY(-3px);border-color:var(--line-strong);color:var(--ink);}
+  .chip b{color:var(--brand);font-size:15px;}
+
+  section{padding:44px 0;position:relative;}
+  .sec-title{font-size:24px;font-weight:800;margin-bottom:6px;}
+  .sec-sub{color:var(--mut);font-size:15px;margin-bottom:26px;max-width:840px;}
+
+  /* ===== Three tiers: equal-height cards + paper-layer fan-out (Elo One style) ===== */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .tiers>div{height:100%;position:relative;}
+  .tiers>div::before,.tiers>div::after{content:"";position:absolute;bottom:100%;left:16px;right:16px;height:16px;border-radius:14px 14px 0 0;border:1px solid rgba(245,158,11,.16);border-bottom:none;pointer-events:none;transition:transform .45s cubic-bezier(.22,.61,.36,1);}
+  .tiers>div::before{background:rgba(255,247,237,.05);transform:translateY(-3px);}
+  .tiers>div::after{left:32px;right:32px;background:rgba(255,247,237,.028);transform:translateY(-9px);}
+  .tiers>div:hover::before{transform:translateY(-9px);}
+  .tiers>div:hover::after{transform:translateY(-18px);}
+  .tier{height:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px 26px;display:flex;flex-direction:column;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+  .tier.free{background:radial-gradient(120% 90% at 20% 0%,rgba(245,158,11,.09),transparent 62%),var(--card);}
+  .tier.plugin{background:radial-gradient(120% 90% at 20% 0%,rgba(192,132,252,.09),transparent 62%),var(--card);}
+  .tier.commercial{background:radial-gradient(120% 90% at 20% 0%,rgba(251,113,133,.11),transparent 62%),var(--card);}
+  .tier::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(245,158,11,.12),transparent 65%);}
+  .tier:hover::before{opacity:1;}
+  .tier:hover{transform:translateY(-9px);border-color:var(--line-strong);box-shadow:0 22px 48px -20px rgba(245,158,11,.32);}
+  .tier.commercial{border-color:rgba(245,158,11,.5);box-shadow:0 0 0 1px rgba(245,158,11,.18) inset,0 0 34px -6px rgba(245,158,11,.22);animation:commGlow 4.5s ease-in-out infinite;}
+  @keyframes commGlow{50%{box-shadow:0 0 0 1px rgba(245,158,11,.24) inset,0 0 52px -4px rgba(245,158,11,.34);}}
+  .tier .tier-no{font-size:13px;color:var(--mut);letter-spacing:.08em;}
+  .tier h3{font-size:18px;margin:6px 0 4px;}
+  .tier .badge{display:inline-block;font-size:12px;padding:3px 10px;border-radius:12px;font-weight:700;margin-bottom:12px;align-self:flex-start;}
+  .tier.free .badge{background:rgba(245,158,11,.16);color:var(--brand);}
+  .tier.plugin .badge{background:rgba(192,132,252,.16);color:#c084fc;}
+  .tier.commercial .badge{background:rgba(251,113,133,.16);color:#fb7185;}
+  .tier p.desc{font-size:14px;color:var(--mut);margin-bottom:14px;}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+  .tier ul li{font-size:13.5px;color:var(--ink);padding-left:20px;position:relative;}
+  .tier ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--brand);transition:transform .3s;}
+  .tier:hover ul li::before{transform:scale(1.25);}
+  .tier .tier-meta{margin-top:auto;font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:12px;line-height:1.7;}
+  .tier .tier-meta code{background:var(--soft);padding:1px 7px;border-radius:6px;font-size:12px;color:var(--brand);}
+  .tier .tier-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;align-self:flex-start;padding:8px 16px;border-radius:20px;border:1px solid var(--line-strong);color:var(--brand);text-decoration:none;font-size:13px;font-weight:700;background:rgba(245,158,11,.08);transition:background .3s,transform .3s,color .3s,box-shadow .3s;}
+  .tier .tier-cta:hover{background:rgba(245,158,11,.17);transform:translateY(-2px);color:#fbbf24;box-shadow:0 8px 20px -8px rgba(245,158,11,.35);}
+
+  @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  .chips.in .chip{animation:riseIn .55s cubic-bezier(.22,.61,.36,1) backwards;}
+  .chips.in .chip:nth-child(2){animation-delay:.07s;}
+  .chips.in .chip:nth-child(3){animation-delay:.14s;}
+  .chips.in .chip:nth-child(4){animation-delay:.21s;}
+  .chips.in .chip:nth-child(5){animation-delay:.28s;}
+  .diff.in tbody tr{animation:riseIn .5s cubic-bezier(.22,.61,.36,1) backwards;}
+  .diff.in tbody tr:nth-child(2){animation-delay:.06s;}
+  .diff.in tbody tr:nth-child(3){animation-delay:.12s;}
+  .diff.in tbody tr:nth-child(4){animation-delay:.18s;}
+  .diff.in tbody tr:nth-child(5){animation-delay:.24s;}
+  .diff.in tbody tr:nth-child(6){animation-delay:.3s;}
+
+  /* ===== Comparison table: row reveal + hover sweep + always-lit commercial column ===== */
+  .diff{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:24px;transition:border-color .4s,box-shadow .4s;}
+  .diff:hover{border-color:var(--line-strong);box-shadow:0 18px 44px -22px rgba(245,158,11,.25);}
+  .diff table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .diff th,.diff td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  .diff th{background:var(--soft);font-weight:700;color:var(--ink);}
+  .diff td:first-child{font-weight:700;color:var(--ink);width:26%;}
+  .diff th:last-child,.diff td:last-child{background:linear-gradient(90deg,rgba(245,158,11,.09),rgba(245,158,11,.03));}
+  .diff th:last-child{color:var(--brand);}
+  .diff tbody tr{transition:background .3s;}
+  .diff tbody tr:hover td:not(:last-child){background:rgba(245,158,11,.05);}
+  .yes{color:var(--ok);font-weight:700;}
+  .no{color:#a8a29e;}
+  .mid{color:var(--warn);font-weight:700;}
+
+  /* ===== Four guarantees: staggered lift ===== */
+  .guarantees{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .g-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:14px;padding:20px 22px;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+  .g-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(245,158,11,.10),transparent 65%);}
+  .g-card:hover::before{opacity:1;}
+  .g-card:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 16px 36px -18px rgba(245,158,11,.3);}
+  .g-card .g-no{font-size:12px;color:var(--brand);letter-spacing:.14em;font-weight:800;margin-bottom:6px;display:block;}
+  .g-card h4{font-size:15px;margin-bottom:7px;}
+  .g-card p{font-size:13.5px;color:var(--mut);}
+
+  /* Capability grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+  .card::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--brand),#fb7185);transition:width .5s cubic-bezier(.22,.61,.36,1);}
+  .card:hover::after{width:100%;}
+  .card:hover{transform:translateY(-6px);border-color:var(--line-strong);}
+  .card h3{font-size:15px;margin-bottom:6px;}
+  .card p{font-size:13px;color:var(--mut);}
+
+  /* ===== Benchmark section: bar growth + sheen ===== */
+  .bench{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:20px;transition:border-color .4s,box-shadow .4s;}
+  .bench:hover{border-color:var(--line-strong);box-shadow:0 16px 40px -22px rgba(245,158,11,.24);}
+  .bench .bt{font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .bench .what{font-size:14px;color:var(--mut);margin:8px 0 18px;}
+  .bars{display:flex;flex-direction:column;gap:14px;}
+  .bar-row{display:grid;grid-template-columns:150px 1fr 78px;align-items:center;gap:12px;}
+  .bar-row .lab{font-size:13px;color:var(--mut);}
+  .track{background:#14100d;border-radius:8px;height:22px;position:relative;overflow:hidden;}
+  .fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:12px;font-weight:700;width:0;transition:width 1.3s cubic-bezier(.22,.61,.36,1);position:relative;overflow:hidden;}
+  .fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-100%);animation:sheen 3.2s ease-in-out infinite;}
+  @keyframes sheen{60%,100%{transform:translateX(100%);}}
+  .fill.nm{background:#78716c;}
+  .fill.nx{background:var(--brand);}
+  .fill.fc{background:#c084fc;}
+  .val{font-size:13px;font-weight:700;text-align:right;color:var(--ink);}
+  .legend{display:flex;gap:18px;font-size:12px;color:var(--mut);margin-top:6px;flex-wrap:wrap;}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;color:#fff;background:var(--info);font-weight:700;animation:pillPulse 2.8s ease-in-out infinite;}
+  @keyframes pillPulse{50%{box-shadow:0 0 0 5px rgba(192,132,252,0);filter:brightness(1.15);}}
+
+  /* Honest boundaries */
+  .use-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .use-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+  .use-card.yes{border-left:4px solid var(--ok);}
+  .use-card.watch{border-left:4px solid var(--warn);}
+  .use-card:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 16px 36px -20px rgba(0,0,0,.5);}
+  .use-card h3{font-size:15px;margin-bottom:8px;}
+  .use-card p{font-size:14px;color:var(--mut);}
+
+  /* Comparison table */
+  .cmp{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .4s;}
+  .cmp:hover{border-color:var(--line-strong);}
+  .cmp table{width:100%;border-collapse:collapse;font-size:13px;}
+  .cmp th,.cmp td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  .cmp th{background:var(--soft);font-weight:700;color:var(--ink);}
+  .cmp td:first-child{font-weight:700;color:var(--ink);}
+  .cmp tbody tr{transition:background .3s;}
+  .cmp tbody tr:hover{background:rgba(245,158,11,.05);}
+  .cmp tr:last-child td{border-bottom:none;}
+  .cmp th:nth-child(2),.cmp td:nth-child(2){background:rgba(245,158,11,.06);}
+
+  /* Papers */
+  .paper{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:16px;transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+  .paper:hover{transform:translateY(-4px);border-color:var(--line-strong);}
+  .paper.primary{border-color:rgba(245,158,11,.5);box-shadow:0 0 0 1px rgba(245,158,11,.18) inset,0 0 30px -8px rgba(245,158,11,.2);}
+  .pbadge{display:inline-block;font-size:12px;padding:3px 10px;border-radius:12px;font-weight:700;margin-bottom:12px;background:rgba(245,158,11,.16);color:var(--brand);}
+  .paper h3{font-size:16px;margin-bottom:4px;}
+  .paper .meta{font-size:12px;color:var(--mut);margin-bottom:8px;}
+  .paper p{font-size:13px;color:var(--mut);}
+  .paper .links{margin-top:12px;font-size:13px;}
+  .paper .links a{color:var(--brand);text-decoration:none;margin-right:14px;transition:color .3s;}
+  .paper .links a:hover{color:#fbbf24;text-decoration:underline;}
+  .paper.draft{opacity:.85;}
+  .paper.draft h3{font-size:15px;}
+  .draft-en{display:block;font-size:12.5px;color:var(--mut);font-weight:400;margin-top:3px;}
+  .paper-sub{font-size:17px;font-weight:800;margin:14px 0 2px;}
+
+  @media(prefers-reduced-motion:reduce){
+    .orb,.hero .tag,.hero h1 em,.fill::after,.pill,.tier.commercial,.chips.in .chip,.diff.in tbody tr{animation:none!important;}
+    .rv{opacity:1!important;transform:none!important;transition:none!important;}
+    .fill{transition:none!important;}
+    html{scroll-behavior:auto;}
+  }
+
+  footer{border-top:1px solid var(--line);padding:24px 0;text-align:center;color:var(--mut);font-size:13px;margin-top:20px;}
+  @media(max-width:860px){.tiers{grid-template-columns:1fr;}.guarantees{grid-template-columns:1fr;}}
+  @media(max-width:640px){.use-grid{grid-template-columns:1fr;}.bar-row{grid-template-columns:100px 1fr 64px;}.diff table,.cmp table{font-size:12px;}.hero h1{font-size:26px;}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="bg-orbs" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="../ahm/index.html">AHM</a><div class="sub-menu"><a href="../ahm/index.html">AHM Overview</a><a href="../ahm/self-test.html">Free Self-Test</a><a href="../ahm/connect.html">Integration</a><a href="../ahm/deep-diagnosis.html">Deep Diagnosis</a><a href="../ahm/brief-report.html">Brief Report</a><a href="../ahm/report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html" class="cur">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="crumb rv">Product · Long-Term Memory Foundation</div>
+    <span class="tag rv">Local-first · auditable long-term memory product system</span>
+    <h1 class="rv">Nexus: A local memory foundation that helps Agents <em>remember, explain, and support regression testing</em></h1>
+    <p class="lead rv">Nexus is not a single finished product, but a product system built around "long-term memory" — from free, open-source baseline capabilities, to a ready-to-use platform plugin, to an enterprise-backed commercial core. Below we first clarify what the three tiers are and who they are for, then why they may be worth your consideration.</p>
+    <div class="hero-contact" style="margin:18px 0 0"><a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a><a class="gh" href="https://github.com/kialajin-l" target="_blank" rel="noopener">github.com/kialajin-l ↗</a></div>
+    <div class="chips rv">
+      <div class="chip"><b>1.0</b> Core mechanism defined</div>
+      <div class="chip"><b>1.5</b> Quality baseline established</div>
+      <div class="chip">Local-first · no cloud lock-in</div>
+      <div class="chip">Auditable · regressive-testable</div>
+      <div class="chip">2,254 regression tests passed</div>
+    </div>
+  </div>
+
+  <!-- ===== Three product tiers (stepped) ===== -->
+  <section>
+    <h2 class="sec-title rv">Three tiers, choose what you need</h2>
+    <p class="sec-sub rv">One memory core, three delivery forms. Higher tiers offer stronger guarantees and less to manage; lower tiers offer more freedom and less weight. You can start with the free layer and move up as your needs grow.</p>
+    <div class="tiers" data-stagger>
+      <div><div class="tier free">
+        <div class="tier-no">① Foundation · Open source</div>
+        <h3>Nexus Open-Source Skill</h3>
+        <span class="badge">PolyForm NC · free for non-commercial use</span>
+        <p class="desc">For developers and self-hosting users. Cross-session long-term memory is provided as an open-source skill, free to use and build on.</p>
+        <ul>
+          <li>Cross-session persistent memory: stable writes, reads, and local SQLite persistence</li>
+          <li>Candidate retrieval and filtering, then injecting relevant material into context</li>
+          <li>Feedback and candidate contracts; memory boundaries remain auditable</li>
+          <li>PolyForm-Noncommercial license; free for personal and non-commercial use</li>
+        </ul>
+        <div class="tier-meta">License: <b>PolyForm-Noncommercial-1.0.0</b> (commercial use requires a separate license)<br>Status: Open source · available on GitHub (foundation layer)</div>
+        <a class="tier-cta" href="https://github.com/kialajin-l/Nexus" target="_blank" rel="noopener">View Nexus Skill on GitHub ↗</a>
+      </div></div>
+
+      <div><div class="tier plugin">
+        <div class="tier-no">② Integration · Platform plugin</div>
+        <h3>dsh-nexus-memory</h3>
+        <span class="badge">DSH plugin · v0.3.1 released</span>
+        <p class="desc">A memory plugin for the DSH desktop agent platform, built on Nexus, bringing long-term memory directly into your Agent workflow.</p>
+        <ul>
+          <li>New sessions automatically inject project-relevant memory (noise filtering, threshold gating, no global noise)</li>
+          <li>A "Memory" button in the title bar: extracts memory from the last 10 turns, with lightweight rules by default at zero token cost</li>
+          <li>Write deduplication + feedback-weighted ranking (accept or correct adjusts future scores)</li>
+          <li>Local SQLite store; degrades silently if the store is missing</li>
+        </ul>
+        <div class="tier-meta">License: PolyForm-Noncommercial<br>Install: <code>dsh plugin --profile desktop add dsh-nexus-memory</code><br>Status: v0.3.1 released</div>
+        <a class="tier-cta" href="https://github.com/kialajin-l/DSH_Plus" target="_blank" rel="noopener">View DSH_Plus on GitHub ↗</a>
+      </div></div>
+
+      <div><div class="tier commercial">
+        <div class="tier-no">③ Full guarantees · Commercial edition</div>
+        <h3>Nexus-Commercial Core</h3>
+        <span class="badge">Closed-source commercial · In closed beta</span>
+        <p class="desc">A managed memory core for enterprises and teams. On top of the open-source capabilities, it adds isolation, encryption, auditing, and compliance — turning "can remember" into "safe for production".</p>
+        <ul>
+          <li>User isolation · seat-level lifecycle control; multi-tenant memories stay independent</li>
+          <li>Memory consistent across devices and models: one API Key works everywhere</li>
+          <li>Private / on-prem deployment; data stays in your own environment</li>
+          <li>Team collaboration with a shared memory store</li>
+        </ul>
+        <div class="tier-meta">License: Closed-source commercial<br>Status: In closed beta · release planned (see guarantees below)</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== Why the commercial edition ===== -->
+  <section>
+    <h2 class="sec-title rv">Why the commercial edition, and how it differs from ordinary memory software</h2>
+    <p class="sec-sub rv">Most memory solutions on the market stop at "putting things into a vector store". What makes Nexus Commercial different is that it treats memory as an asset that needs to be governed, not as one-off context stitching.</p>
+    <div class="diff rv">
+      <table>
+        <thead><tr><th>Dimension</th><th>Ordinary memory / RAG / cloud memory</th><th>Nexus Commercial</th></tr></thead>
+        <tbody data-stagger>
+          <tr><td>Data ownership and egress</td><td class="no">Mostly relies on public cloud; data leaves your boundary</td><td class="yes">Local-first, private deployment available, data stays inside your boundary</td></tr>
+          <tr><td>Multi-user / multi-tenant isolation</td><td class="no">Often a single shared store, no isolation</td><td class="yes">Seat-level isolation, memories stay independent</td></tr>
+          <tr><td>Auditing and rollback</td><td class="no">Writes are a black box, hard to trace</td><td class="yes">Every read and write is logged; reversible and auditable</td></tr>
+          <tr><td>Storage security</td><td class="mid">Depends on deployment, often plaintext</td><td class="yes">Enforced encryption for local storage</td></tr>
+          <tr><td>Licensing and compliance</td><td class="no">No contract validation</td><td class="yes">Signature + license contract validation</td></tr>
+          <tr><td>Production support</td><td class="mid">Community or Best-effort</td><td class="yes">Managed stability guarantees and response support</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="rv" style="font-size:17px;margin-bottom:16px;">Four special guarantees of the commercial edition</h3>
+    <div class="guarantees" data-stagger>
+      <div class="rv"><div class="g-card"><span class="g-no">01</span><h4>Local-first · data stays in your boundary</h4><p>Memory can stay entirely in your own environment, with private (On-prem) deployment, no public-cloud dependency, and sensitive data kept in your boundary.</p></div></div>
+      <div class="rv"><div class="g-card"><span class="g-no">02</span><h4>Auditable · rollback · evidence chain</h4><p>Every memory read, write, injection, and reclamation is logged, with rollback and hash-level auditing, so issues can be traced to a specific operation.</p></div></div>
+      <div class="rv"><div class="g-card"><span class="g-no">03</span><h4>Encrypted storage · licensing compliance</h4><p>Enforced encryption for local storage, combined with signature and license contract validation, to meet enterprise compliance and entitlement requirements.</p></div></div>
+      <div class="rv"><div class="g-card"><span class="g-no">04</span><h4>Production-grade SLA · stability</h4><p>Compared with the open-source / trial versions, the commercial edition provides managed stability guarantees and response support, suited to real production workloads.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===== Capability overview ===== -->
+  <section>
+    <h2 class="sec-title rv">What capabilities it provides</h2>
+    <p class="sec-sub rv">Whichever tier you choose, the same set of memory capabilities sits underneath. The list below shows what it is made of.</p>
+    <div class="grid" data-stagger>
+      <div class="rv"><div class="card"><h3>Memory write and read</h3><p>Stable API writes, reads, and local SQLite persistence, covered by regression tests.</p></div></div>
+      <div class="rv"><div class="card"><h3>Candidate retrieval and filtering</h3><p>Recall relevant material from memory, filter candidates, then inject the result into context.</p></div></div>
+      <div class="rv"><div class="card"><h3>Feedback and candidate contracts</h3><p>Supports feedback, candidate contracts, and read-only projections; memory boundaries remain auditable.</p></div></div>
+      <div class="rv"><div class="card"><h3>Backup and recovery</h3><p>Backup, restore, and re-lock have been verified in controlled flows; data can be recovered.</p></div></div>
+      <div class="rv"><div class="card"><h3>Reproducible install</h3><p>Isolated installation and basic CLI consumption have been verified and can be reproduced locally.</p></div></div>
+      <div class="rv"><div class="card"><h3>Lifecycle management</h3><p>Memory expiry, archiving, and reclamation are handled under a unified lifecycle governance.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===== Validation baseline ===== -->
+  <section>
+    <h2 class="sec-title rv">Validation baseline: what level it has reached</h2>
+    <p class="sec-sub rv">We run local diagnostics against three public long-term memory benchmarks — not to chase leaderboards, but to see where "retrieval / answers / cost" actually stand. All figures come from on-device model diagnostics and are <b>not official leaderboard results</b>.</p>
+
+    <div class="bench rv">
+      <div class="bt">LongMemEval · Conversational memory recall <span class="pill">Local diagnostic</span></div>
+      <div class="what">What it measures: whether an Agent can "find back" the truly relevant historical material across long, multi-session conversations. Higher recall means less chance of losing context.</div>
+      <div class="bars">
+        <div class="bar-row"><span class="lab">any-session recall</span><div class="track"><div class="fill nx" data-w="97.45">0.9745</div></div><span class="val">&nbsp;</span></div>
+        <div class="bar-row"><span class="lab">all-session recall</span><div class="track"><div class="fill nx" data-w="92.13">0.9213</div></div><span class="val">&nbsp;</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--mut);margin-top:10px;">Interpretation: under local diagnostics, recall of relevant material sits in the upper range of the public literature — the "finding it" layer is already fairly solid.</p>
+    </div>
+
+    <div class="bench rv">
+      <div class="bt">AMA-Bench · memory augmentation vs no memory <span class="pill">Local diagnostic</span></div>
+      <div class="what">What it measures: in real web / task scenarios, comparing answer quality (token-F1) across three setups — "no memory at all (no-memory)", "full context as plaintext (full-context)", and "memory augmentation (Nexus flat)".</div>
+      <div class="bars">
+        <div class="bar-row"><span class="lab">4B · no-memory</span><div class="track"><div class="fill nm" data-w="62.9">0.1450</div></div><span class="val">0.1450</span></div>
+        <div class="bar-row"><span class="lab">4B · Nexus flat</span><div class="track"><div class="fill nx" data-w="100">0.2314</div></div><span class="val">0.2314</span></div>
+        <div class="bar-row"><span class="lab">4B · full-context</span><div class="track"><div class="fill fc" data-w="90.3">0.2082</div></div><span class="val">0.2082</span></div>
+        <div class="bar-row" style="margin-top:6px;"><span class="lab">8B · no-memory</span><div class="track"><div class="fill nm" data-w="28.5">0.0659</div></div><span class="val">0.0659</span></div>
+        <div class="bar-row"><span class="lab">8B · Nexus flat</span><div class="track"><div class="fill nx" data-w="100">0.3800</div></div><span class="val">0.3800</span></div>
+        <div class="bar-row"><span class="lab">8B · full-context</span><div class="track"><div class="fill fc" data-w="100">0.3937</div></div><span class="val">0.3937</span></div>
+      </div>
+      <div class="legend"><span><i style="background:#78716c"></i>No memory (no-memory)</span><span><i style="background:var(--brand)"></i>Nexus flat memory augmentation</span><span><i style="background:#c084fc"></i>Full context (full-context)</span></div>
+      <p style="font-size:13px;color:var(--mut);margin-top:10px;">Interpretation: memory augmentation clearly beats "remembering nothing" (about 1.6× at 4B, about 5.8× at 8B), and at 8B it is already close to "stuffing the entire history into context" — evidence that memory is doing real work.</p>
+    </div>
+
+    <div class="bench rv">
+      <div class="bt">LoCoMo · Long-dialogue QA retrieval <span class="pill">Local diagnostic</span></div>
+      <div class="what">What it measures: factual question answering and material retrieval quality in multi-turn dialogues (Recall@20 / MRR).</div>
+      <div class="bars">
+        <div class="bar-row"><span class="lab">Recall@20 (before expansion)</span><div class="track"><div class="fill nm" data-w="55.44">0.5544</div></div><span class="val">0.5544</span></div>
+        <div class="bar-row"><span class="lab">Recall@20 (after expansion)</span><div class="track"><div class="fill nx" data-w="60.98">0.6098</div></div><span class="val">0.6098</span></div>
+        <div class="bar-row"><span class="lab">MRR (after expansion)</span><div class="track"><div class="fill nx" data-w="43.76">0.4376</div></div><span class="val">0.4376</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--mut);margin-top:10px;">Interpretation: deterministic word-form expansion steadily improves retrieval recall and ranking; this is why the "finding it" layer can be trusted.</p>
+    </div>
+
+    <div class="bench rv">
+      <div class="bt">Engineering and capacity baseline</div>
+      <div class="what">What it measures: engineering stability — whether it avoids crashes, data loss, and lock contention under real load.</div>
+      <div class="bars">
+        <div class="bar-row"><span class="lab">Full pytest regression</span><div class="track"><div class="fill nx" data-w="100">2,254 passed</div></div><span class="val">0 failures</span></div>
+        <div class="bar-row"><span class="lab">AML capacity matrix (900 requests)</span><div class="track"><div class="fill nx" data-w="100">0% failure rate</div></div><span class="val">0 failures</span></div>
+        <div class="bar-row"><span class="lab">AMA/scorecard targeted</span><div class="track"><div class="fill nx" data-w="100">16 passed</div></div><span class="val">0 failures</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--mut);margin-top:10px;">Interpretation: on synthetic data under short local load, writes and retrieval show zero failures and no SQLite lock contention — the engineering baseline is solid.</p>
+    </div>
+  </section>
+
+  <!-- ===== Honest boundaries ===== -->
+  <section>
+    <h2 class="sec-title rv">Is it usable in real conditions</h2>
+    <p class="sec-sub rv">In plain terms: the foundation can reliably "remember and find back", but "finding material" is not the same as "always answering correctly". Below is our honest assessment of whether it is ready to deploy.</p>
+    <div class="use-grid" data-stagger>
+      <div class="rv"><div class="use-card yes"><h3>✓ Ready to use</h3><p>Local-first, auditable, zero-failure regressions, zero crashes under controlled capacity — well suited to small teams that want to keep memory on their own machines, without worrying about data leaving their boundary or being locked in.</p></div></div>
+      <div class="rv"><div class="use-card yes"><h3>✓ Retrieval layer is trustworthy</h3><p>Session recall sits in the upper range of the public literature; memory augmentation clearly beats "no memory" across several slices and is already close to the "full context" effect.</p></div></div>
+      <div class="rv"><div class="use-card watch"><h3>△ Still being refined</h3><p>Absolute answer accuracy still needs work — we position it as a "memory and evidence layer", not a "fully automatic answer machine". That is exactly why we offer a diagnostic methodology rather than pushing a black-box product.</p></div></div>
+      <div class="rv"><div class="use-card watch"><h3>△ Cost needs attention</h3><p>4B responds in about 1.5–2.3 seconds and is usable; 8B has higher latency on some slices (about 28 seconds) and is still being optimized. We recommend choosing a model per scenario rather than defaulting to larger parameter counts.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===== Route comparison ===== -->
+  <section>
+    <h2 class="sec-title rv">How it compares with other memory approaches, and whether it is worth using</h2>
+    <p class="sec-sub rv">The table below compares four common approaches side by side. The criterion: whether you need "local control + auditable + no cloud lock-in", and whether you can accept "strong memory retrieval, absolute answers still improving".</p>
+    <div class="cmp rv">
+      <table>
+        <thead><tr><th>Dimension</th><th>Nexus (this research foundation)</th><th>No-memory baseline</th><th>Full context (full-context)</th><th>General RAG / vector store</th></tr></thead>
+        <tbody>
+          <tr><td>Cross-session long-term memory</td><td class="yes">Yes, auditable</td><td class="no">None</td><td class="mid">Yes (bounded by context limits)</td><td class="yes">Yes</td></tr>
+          <tr><td>Regressive-testable / auditable</td><td class="yes">Candidate contracts + read-only projections</td><td class="no">Not visible</td><td class="no">Not visible</td><td class="mid">Partial</td></tr>
+          <tr><td>Local-first / privacy</td><td class="yes">Data stays on this machine</td><td class="yes">No data retained</td><td class="no">High token usage, external dependency</td><td class="mid">Depends on deployment</td></tr>
+          <tr><td>Retrieval recall quality</td><td class="mid">Relatively high (upper range of public literature)</td><td class="no">Low</td><td class="yes">High</td><td class="mid">Medium</td></tr>
+          <tr><td>Absolute answer accuracy</td><td class="mid">Medium (still improving)</td><td class="no">Low</td><td class="yes">High (depends on the model)</td><td class="mid">Medium</td></tr>
+          <tr><td>Running cost</td><td class="yes">Locally controllable</td><td class="yes">0</td><td class="no">Highest token cost</td><td class="mid">Medium</td></tr>
+          <tr><td>Best for</td><td>Small teams needing auditable memory / local-first scenarios</td><td>Minimal one-off questions</td><td>Strong model + ample budget</td><td>Knowledge-base retrieval</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== Related papers ===== -->
+  <section>
+    <h2 class="sec-title rv">Related papers</h2>
+    <p class="sec-sub rv">Research is the source of the methodology behind this foundation. The only paper made public so far is a Zenodo preprint; early research drafts are also listed below for full context.</p>
+
+    <div class="paper primary rv">
+      <span class="pbadge">Public · Preprint</span>
+      <h3>Answer-Level Semantic Shift under Sparse Keyword Rendering: A Measurement Study with a Small Language Model</h3>
+      <div class="meta">Wayne Liang · Zenodo v1 preprint · 2026 · not yet peer reviewed</div>
+      <p>This paper studies answer-level semantic shift in small language models under sparse keyword rendering; it is not a product evaluation or validation of the current Nexus Skill in this repository. It is made public as methodological background so you can judge whether its approach to memory retrieval and semantic fidelity fits your scenario.</p>
+      <div class="links">
+        <a href="https://doi.org/10.5281/zenodo.23864337" target="_blank" rel="noopener">🔗 DOI (v1 preprint) 10.5281/zenodo.23864337</a>
+        <a href="https://doi.org/10.5281/zenodo.23864336" target="_blank" rel="noopener">📚 All versions / Concept DOI 10.5281/zenodo.23864336</a>
+      </div>
+    </div>
+
+    <h3 class="paper-sub rv">Early research drafts (Unpublished)</h3>
+    <p class="rv" style="font-size:13.5px;color:var(--mut);margin-bottom:16px;max-width:840px;">The two items below are early research drafts, <b>unpublished</b>, superseded by the measurement-study preprint above, and retained for context only.</p>
+
+    <div class="paper draft rv">
+      <h3>Research on Lightweight External Memory and Rule Augmentation <span class="draft-en">Lightweight External Memory and Rule Augmentation for Small Language Models</span></h3>
+      <div class="meta">Early research draft (Unpublished)</div>
+      <p>Early main line: external augmentation was split into a memory layer, a rule layer, and a routing layer, with staged experiments around semantic fidelity, downstream gains, and system lower bounds. This direction evolved into the measurement-study preprint above; the original manuscript was never published on its own.</p>
+    </div>
+
+    <div class="paper draft rv">
+      <h3>On the Boundaries of Memory Compression and Semantic Fidelity <span class="draft-en">Memory Compression and Semantic Fidelity Boundaries</span></h3>
+      <div class="meta">Early research draft (Unpublished)</div>
+      <p>Early sub-direction: compares how semantic fidelity changes across compression strengths and material types, framing memory compression as a quantifiable long-term memory representation interface. This draft was not published as a standalone public paper.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.NEXUS · Public materials for the long-term memory products · Figures and papers carry boundary labels and are kept separate from the defined Nexus product</div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Top reading progress bar */
+  var bar = document.getElementById('progress');
+  function updBar(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', updBar, {passive:true});
+  updBar();
+
+  /* Assign staggered delays to the children of stagger containers */
+  document.querySelectorAll('[data-stagger]').forEach(function(g){
+    var kids = g.children;
+    for (var i = 0; i < kids.length; i++) {
+      kids[i].style.setProperty('--d', Math.min(i * 0.09, 0.6).toFixed(2) + 's');
+    }
+  });
+
+  /* Scroll reveal + trigger bar growth */
+  var fills = document.querySelectorAll('.fill');
+  function growFills(scope){
+    fills.forEach(function(f){
+      if (scope && !scope.contains(f)) return;
+      if (f.dataset.done) return;
+      f.dataset.done = '1';
+      f.style.width = f.dataset.w + '%';
+    });
+  }
+  if (reduced || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+    growFills();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        growFills(e.target);
+        io.unobserve(e.target);
+      });
+    }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  }
+
+  /* Cursor spotlight tracking (card highlight) */
+  if (!reduced && window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.tier,.g-card,.card').forEach(function(c){
+      c.addEventListener('mousemove', function(e){
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.AHM Deep Diagnosis — Local deep-diagnosis workflow and evidence boundaries.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · AHM Deep Diagnosis</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  
+  
+  .nav a:hover{color:var(--brand);}
+  .head{padding:34px 0 8px;}
+  .head h1{font-size:24px;font-weight:800;}
+  .head p{color:var(--mut);font-size:14px;margin-top:6px;}
+  h2{font-size:17px;font-weight:800;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+  .card h3{font-size:15px;margin-bottom:8px;}
+  .card p{font-size:13px;color:var(--mut);}
+  .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px;margin:6px 0 18px;}
+  .flow .ph{background:rgba(245,158,11,.14);color:var(--brand-d);border-radius:8px;padding:6px 12px;font-weight:600;}
+  .flow .ar{color:var(--mut);}
+  .price{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:26px;text-align:center;max-width:460px;margin:10px auto;}
+  .price .p-now{font-size:34px;font-weight:800;color:var(--brand);}
+  .price .p-was{color:var(--mut);text-decoration:line-through;font-size:15px;}
+  .price .p-tag{display:inline-block;background:rgba(249,115,22,.16);color:var(--warn);font-size:12px;padding:2px 10px;border-radius:12px;margin-left:8px;}
+  .price ul{text-align:left;margin:14px 0 0 20px;font-size:13px;color:var(--mut);}
+  .note{background:#fff7ed8e1;border:1px solid rgba(251,191,36,.35);border-radius:10px;padding:14px 16px;font-size:13px;color:#fbbf24;margin:20px 0;}
+  .safe{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:14px 16px;font-size:13px;margin:16px 0;}
+  .safe ul{margin:6px 0 0 18px;}
+  .cta{text-align:center;margin:28px 0;}
+  .btn{display:inline-block;padding:13px 30px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;transition:.15s;margin:6px;}
+  .btn-p{background:var(--brand);color:#fff;}
+  .btn-p:hover{background:var(--brand-d);}
+  .btn-o{background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);}
+  .btn-o:hover{background:rgba(245,158,11,.10);}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--mut);font-size:12px;text-align:center;margin-top:30px;}
+  @media(max-width:640px){.flow{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="index.html" class="cur">AHM</a><div class="sub-menu"><a href="index.html">AHM Overview</a><a href="self-test.html">Free Self-Test</a><a href="connect.html">Integration</a><a href="deep-diagnosis.html" class="cur">Deep Diagnosis</a><a href="brief-report.html">Brief Report</a><a href="report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Local deep diagnosis (paid)</h1>
+    <p>You run a fuller probe profile locally to produce a <strong>versioned, redacted, verifiable</strong> diagnostic bundle; AHM only handles import, scoring, gap analysis, and a report draft, and it is considered complete <strong>only after human confirmation</strong>.</p>
+  </div>
+
+  <div class="flow">
+    <span class="ph">candidate</span><span class="ar">→</span>
+    <span class="ph">reviewed</span><span class="ar">→</span>
+    <span class="ph">accepted</span><span class="ar">→</span>
+    <span class="ph">completed</span>
+  </div>
+
+  <h2>What is included</h2>
+  <div class="grid">
+    <div class="card"><h3>Fuller probe profile</h3><p>Covers the verification / recovery / tool_selection / safety dimensions; more complete than the free Evidence-lite and repeatable.</p></div>
+    <div class="card"><h3>Versioned diagnostic bundle</h3><p>Generated locally, redacted, and verifiable; AHM handles import, scoring, gap analysis, regression, and the report draft.</p></div>
+    <div class="card"><h3>baseline / candidate comparison</h3><p>Quantifies changes before and after governance, turning "drift" into a measurable number.</p></div>
+    <div class="card"><h3>Human confirmation and readout</h3><p>The report is a candidate recommendation and becomes accepted after human review; includes a 15-minute results readout.</p></div>
+  </div>
+
+  <h2>Price</h2>
+  <div class="price">
+    <div><span class="p-now">Price TBD</span> <span class="p-tag">Updated once the final price is set</span></div>
+    <ul>
+      <li>Interview (2–3 h) + detailed report + 15-minute readout</li>
+      <li>Payment method: Alipay; final price, deposit, and refund terms will be published when the service opens</li>
+      <li>Full NDA coverage; the engagement covers methodology only, not implementation</li>
+    </ul>
+  </div>
+
+  <div class="note">⏳ <b>Booking not yet open</b> — This page is a pre-launch preview and does not yet include an online form (no simulated form submissions or diagnostic results). Please start with the <a href="self-test.html" style="color:var(--brand-d);font-weight:600;">Free Self-Test</a>, copy the <code>request_id</code> from the results page, and email us at ranxihub@agent.qq.com to request a booking.</div>
+
+  <div class="safe">
+    <b>Evidence and status boundaries</b>
+    <ul>
+      <li>A deep_local bundle is "locally verifiable diagnostic input"; it does not by itself constitute production evidence;</li>
+      <li>A report draft is a candidate recommendation; without human confirmation it does not count as "governance complete";</li>
+      <li>AHM does not perform direct writes to Nexus and does not connect to it;</li>
+      <li>Public HTTP endpoints, accounts, billing, and production operations remain out of scope and are disabled until authorized.</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <a class="btn btn-p" href="self-test.html">Take the free self-test →</a>
+    <a class="btn btn-o" href="report.html">View the detailed report template (DEMO)</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — The deep-diagnosis booking form is planned; payment method: Alipay; contact: ranxihub@agent.qq.com (provisional; a dedicated channel will follow).</div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+/* ============================================================
+   RanxiHub.AI · ranxihub.css
+   Warm-nebula dark palette (Style B) for content/tool pages
+   (ahm/* and nexus). Recolors the portal design system to amber.
+   ============================================================ */
+
+:root {
+  --ink: #fff7ed;
+  --mut: #a8a29e;
+  --brand: #f59e0b;
+  --brand-d: #d97706;
+  --line: rgba(245, 158, 11, .13);
+  --line-strong: rgba(245, 158, 11, .30);
+  --bg: #0a0908;
+  --card: #1c1917;
+  --ok: #84cc16;
+  --warn: #f97316;
+  --danger: #f87171;
+  --info: #c084fc;
+  --soft: #1c1917;
+  --sev-high: #f87171;
+  --sev-med: #f97316;
+  --sev-low: #84cc16;
+  --ev-sr: #c084fc;
+  --ev-lp: #f59e0b;
+  --ev-dl: #84cc16;
+  --ev-nt: #a8a29e;
+  --ev-bg: rgba(28, 25, 23, .6);
+  color-scheme: dark;
+  font-family: "Inter", "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+html { background: var(--bg); }
+
+body:not(.portal-page) {
+  --ink: #fff7ed;
+  --mut: #a8a29e;
+  --brand: #f59e0b;
+  --brand-d: #d97706;
+  --line: rgba(245, 158, 11, .13);
+  --line-strong: rgba(245, 158, 11, .30);
+  --bg: #0a0908;
+  --card: #1c1917;
+  --ok: #84cc16;
+  --warn: #f97316;
+  --danger: #f87171;
+  --info: #c084fc;
+  --soft: #1c1917;
+  --sev-high: #f87171;
+  --sev-med: #f97316;
+  --sev-low: #84cc16;
+  --ev-sr: #c084fc;
+  --ev-lp: #f59e0b;
+  --ev-dl: #84cc16;
+  --ev-nt: #a8a29e;
+  --ev-bg: rgba(28, 25, 23, .6);
+  --ranxihub-header-offset: 68px;
+  min-width: 0;
+  background-color: var(--bg) !important;
+  background-image:
+    linear-gradient(rgba(245, 158, 11, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 158, 11, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  color: var(--ink) !important;
+}
+
+body:not(.portal-page)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 9, 8, 0.2), rgba(10, 9, 8, 0.9));
+}
+
+body:not(.portal-page) a { text-underline-offset: 3px; }
+
+body:not(.portal-page) a:focus-visible,
+.portal-page a:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+
+body:not(.portal-page) header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom-color: rgba(245, 158, 11, .16) !important;
+  background: rgba(10, 9, 8, .9) !important;
+  backdrop-filter: blur(18px);
+}
+
+body:not(.portal-page) .nav {
+  min-height: 68px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+body:not(.portal-page) .logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink) !important;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body:not(.portal-page) .logo span { color: var(--brand); }
+
+body:not(.portal-page) .nav > nav,
+body:not(.portal-page) .nav > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* warm pill nav */
+body:not(.portal-page) .nav a {
+  position: relative;
+  margin-left: 0 !important;
+  padding: 9px 17px !important;
+  border: 1px solid rgba(245, 158, 11, .13) !important;
+  border-radius: 999px !important;
+  background: rgba(10, 9, 8, .45) !important;
+  color: var(--mut) !important;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: .2s;
+}
+body:not(.portal-page) .nav a::after { display: none; }
+body:not(.portal-page) .nav a:hover,
+body:not(.portal-page) .nav a.cur {
+  color: var(--ink) !important;
+  border-color: rgba(245, 158, 11, .45) !important;
+  background: rgba(245, 158, 11, .1) !important;
+}
+
+body:not(.portal-page) .hero .tag,
+body:not(.portal-page) .pill,
+body:not(.portal-page) .p-tag {
+  border: 1px solid rgba(245, 158, 11, .22);
+  border-radius: 999px;
+  background: rgba(245, 158, 11, .1);
+  color: var(--brand);
+}
+
+body:not(.portal-page) .hero h1,
+body:not(.portal-page) .head h1,
+body:not(.portal-page) .sec-title,
+body:not(.portal-page) h2,
+body:not(.portal-page) .card h3,
+body:not(.portal-page) .m h3,
+body:not(.portal-page) .paper h3 {
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+body:not(.portal-page) .hero h1 em,
+body:not(.portal-page) .hero h1 strong,
+body:not(.portal-page) .sec-title em { color: var(--brand); }
+
+body:not(.portal-page) .card,
+body:not(.portal-page) .m,
+body:not(.portal-page) .q,
+body:not(.portal-page) .team,
+body:not(.portal-page) .bench,
+body:not(.portal-page) .use-card,
+body:not(.portal-page) .paper,
+body:not(.portal-page) .price-card,
+body:not(.portal-page) .step,
+body:not(.portal-page) .faq,
+body:not(.portal-page) .cta,
+body:not(.portal-page) .cmp,
+body:not(.portal-page) .res-box,
+body:not(.portal-page) .next-steps {
+  border-color: var(--line) !important;
+  border-radius: 8px !important;
+  background: rgba(28, 25, 23, .88) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .14);
+}
+
+body:not(.portal-page) .card,
+body:not(.portal-page) .m,
+body:not(.portal-page) .q,
+body:not(.portal-page) .team,
+body:not(.portal-page) .bench,
+body:not(.portal-page) .use-card,
+body:not(.portal-page) .paper,
+body:not(.portal-page) .step {
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+@media (hover: hover) {
+  body:not(.portal-page) .card:hover,
+  body:not(.portal-page) .m:hover,
+  body:not(.portal-page) .bench:hover,
+  body:not(.portal-page) .use-card:hover,
+  body:not(.portal-page) .paper:hover,
+  body:not(.portal-page) .step:hover {
+    transform: translateY(-3px);
+    border-color: rgba(245, 158, 11, .48) !important;
+    background: rgba(41, 37, 36, .96) !important;
+  }
+}
+
+body:not(.portal-page) .promise,
+body:not(.portal-page) .safe,
+body:not(.portal-page) .roadmap,
+body:not(.portal-page) .res-cta,
+body:not(.portal-page) .note,
+body:not(.portal-page) .planned,
+body:not(.portal-page) .field,
+body:not(.portal-page) .demo,
+body:not(.portal-page) .bound,
+body:not(.portal-page) .export {
+  border-color: rgba(245, 158, 11, .22) !important;
+  border-radius: 8px !important;
+  background: rgba(28, 25, 23, .82) !important;
+  color: var(--mut) !important;
+}
+
+body:not(.portal-page) .promise b,
+body:not(.portal-page) .safe b,
+body:not(.portal-page) .roadmap b,
+body:not(.portal-page) .note b,
+body:not(.portal-page) .bound b,
+body:not(.portal-page) .field b { color: var(--ink); }
+
+body:not(.portal-page) .btn {
+  border-radius: 6px !important;
+  box-shadow: none;
+}
+
+body:not(.portal-page) .btn-p,
+body:not(.portal-page) .btn:not(.ghost) {
+  background: var(--brand) !important;
+  color: #0a0908 !important;
+}
+
+body:not(.portal-page) .btn-p:hover,
+body:not(.portal-page) .btn:not(.ghost):hover { background: var(--brand-d) !important; }
+
+body:not(.portal-page) .btn-o,
+body:not(.portal-page) .btn.ghost {
+  border-color: rgba(245, 158, 11, .55) !important;
+  background: transparent !important;
+  color: var(--brand) !important;
+}
+
+body:not(.portal-page) .btn-o:hover,
+body:not(.portal-page) .btn.ghost:hover { background: rgba(245, 158, 11, .1) !important; }
+
+body:not(.portal-page) input,
+body:not(.portal-page) textarea,
+body:not(.portal-page) select {
+  border-color: var(--line) !important;
+  border-radius: 6px !important;
+  background: #14100d !important;
+  color: var(--ink) !important;
+}
+
+body:not(.portal-page) .opt {
+  border-color: var(--line) !important;
+  border-radius: 6px !important;
+  background: #14100d !important;
+  color: var(--mut);
+}
+
+body:not(.portal-page) .opt:hover,
+body:not(.portal-page) .opt.sel {
+  border-color: var(--brand) !important;
+  background: rgba(245, 158, 11, .12) !important;
+  color: var(--brand) !important;
+}
+
+body:not(.portal-page) .track,
+body:not(.portal-page) th,
+body:not(.portal-page) .bar {
+  border-color: var(--line) !important;
+  background: #14100d !important;
+  color: var(--mut) !important;
+}
+
+/* dropdown navigation: projects with tertiary pages under a horizontal line */
+body:not(.portal-page) .has-menu {
+  position: relative;
+}
+body:not(.portal-page) .has-menu > a::after {
+  content: " ▾";
+  font-size: 10px;
+  opacity: .7;
+  margin-left: 2px;
+}
+body:not(.portal-page) .sub-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 170px;
+  padding: 10px 8px;
+  border-top: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: rgba(16, 13, 11, .96);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+  z-index: 50;
+}
+body:not(.portal-page) .has-menu:hover .sub-menu,
+body:not(.portal-page) .has-menu:focus-within .sub-menu {
+  display: flex;
+}
+body:not(.portal-page) .sub-menu a {
+  justify-content: flex-start !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  text-transform: none !important;
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+  padding: 8px 12px !important;
+}
+body:not(.portal-page) .sub-menu a:hover,
+body:not(.portal-page) .sub-menu a.cur {
+  background: rgba(245, 158, 11, .12) !important;
+}
+
+/* report / content components missing from the shared system */
+body:not(.portal-page) .f,
+body:not(.portal-page) .concl,
+body:not(.portal-page) .chip,
+body:not(.portal-page) .dim,
+body:not(.portal-page) .box,
+body:not(.portal-page) .res-box {
+  border-color: var(--line) !important;
+  border-radius: 10px !important;
+  background: rgba(28, 25, 23, .88) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .14);
+}
+
+body:not(.portal-page) .act {
+  background: rgba(245, 158, 11, .08) !important;
+  border: 1px solid rgba(245, 158, 11, .35) !important;
+  border-radius: 8px !important;
+  color: #fff7ed !important;
+}
+body:not(.portal-page) .act b { color: var(--brand) !important; }
+
+body:not(.portal-page) .bc {
+  background: rgba(132, 204, 22, .08) !important;
+  border: 1px solid rgba(132, 204, 22, .35) !important;
+  border-radius: 8px !important;
+  color: #fff7ed !important;
+}
+body:not(.portal-page) .bc b { color: var(--ok) !important; }
+
+body:not(.portal-page) .kind {
+  display: inline-block;
+  background: rgba(245, 158, 11, .12) !important;
+  color: var(--brand) !important;
+  border-radius: 12px;
+  font-size: 12px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+body:not(.portal-page) .sev {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 10px;
+  color: #0a0908 !important;
+}
+body:not(.portal-page) .sev.high { background: var(--danger) !important; }
+body:not(.portal-page) .sev.medium { background: var(--warn) !important; }
+body:not(.portal-page) .sev.low { background: var(--ok) !important; }
+
+body:not(.portal-page) .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: #0a0908 !important;
+}
+body:not(.portal-page) .tag.self_reported { background: var(--info) !important; }
+body:not(.portal-page) .tag.limited_probe { background: var(--brand) !important; }
+body:not(.portal-page) .tag.deep_local { background: var(--ok) !important; }
+body:not(.portal-page) .tag.not_tested { background: var(--mut) !important; }
+
+body:not(.portal-page) .pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 10px;
+  color: #0a0908 !important;
+}
+body:not(.portal-page) .pill:not(.hist):not(.demo) { background: var(--info) !important; }
+body:not(.portal-page) .pill.hist { background: var(--warn) !important; }
+body:not(.portal-page) .pill.demo { background: #78716c !important; }
+
+body:not(.portal-page) .flow .ph {
+  display: inline-block;
+  background: rgba(245, 158, 11, .12) !important;
+  color: var(--brand) !important;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 600;
+}
+
+body:not(.portal-page) .demo {
+  background: rgba(251, 191, 36, .08) !important;
+  border-bottom: 1px solid rgba(251, 191, 36, .2) !important;
+  color: #fbbf24 !important;
+}
+body:not(.portal-page) .demo b { color: #fbbf24 !important; }
+
+body:not(.portal-page) .note,
+body:not(.portal-page) .planned,
+body:not(.portal-page) .safe,
+body:not(.portal-page) .promise,
+body:not(.portal-page) .res-cta,
+body:not(.portal-page) .export,
+body:not(.portal-page) .field {
+  background: rgba(28, 25, 23, .82) !important;
+  border-color: rgba(245, 158, 11, .22) !important;
+  color: var(--mut) !important;
+}
+
+body:not(.portal-page) .note b,
+body:not(.portal-page) .planned b,
+body:not(.portal-page) .safe b,
+body:not(.portal-page) .promise b,
+body:not(.portal-page) .res-cta b,
+body:not(.portal-page) .field b { color: var(--ink); }
+
+body:not(.portal-page) .export pre {
+  background: #14100d !important;
+  color: #ffe8cc !important;
+}
+
+body:not(.portal-page) .bar {
+  background: rgba(10, 9, 8, .9) !important;
+  border-bottom-color: var(--line) !important;
+  color: var(--mut) !important;
+}
+
+body:not(.portal-page) #bar {
+  top: var(--ranxihub-header-offset) !important;
+  z-index: 20 !important;
+}
+
+body:not(.portal-page) .fill.nx {
+  background: var(--brand) !important;
+  color: #0a0908;
+}
+
+body:not(.portal-page) .fill.fc { background: #e7b969 !important; color: #151005; }
+body:not(.portal-page) .fill.nm { background: #73827d !important; }
+
+body:not(.portal-page) th,
+body:not(.portal-page) td,
+body:not(.portal-page) .faq details { border-bottom-color: var(--line) !important; }
+
+body:not(.portal-page) .cmp { overflow-x: auto; }
+body:not(.portal-page) .cmp table { min-width: 690px; }
+
+body:not(.portal-page) code,
+body:not(.portal-page) pre {
+  background: #14100d !important;
+  color: #ffe8cc !important;
+}
+
+body:not(.portal-page) footer {
+  border-top-color: var(--line) !important;
+  color: var(--mut) !important;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+}
+body:not(.portal-page) footer a { color: var(--brand); }
+body:not(.portal-page) .footer-legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 10px;
+}
+body:not(.portal-page) .footer-legal span { color: var(--mut); }
+
+/* ============================================================
+   HERO UNIFICATION (2026-10-24) — ahm/* + nexus heroes adopt
+   the portal project-hero language: left-aligned, mono kicker
+   with dot, large h1, muted lead. Wins over inline page styles
+   by specificity (body:not(.portal-page) .hero ...).
+   ============================================================ */
+body:not(.portal-page) .hero {
+  padding: 96px 0 44px;
+  text-align: left;
+}
+body:not(.portal-page) .hero .crumb {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+body:not(.portal-page) .hero .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  color: var(--brand);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 20px;
+}
+body:not(.portal-page) .hero .tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 14px currentColor;
+}
+body:not(.portal-page) .hero h1 {
+  font-size: clamp(34px, 4.6vw, 58px);
+  font-weight: 750;
+  line-height: 1.06;
+  letter-spacing: -.02em;
+  text-align: left;
+  margin-bottom: 0;
+}
+body:not(.portal-page) .hero .sub,
+body:not(.portal-page) .hero .lead {
+  color: var(--mut) !important;
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 680px;
+  margin: 20px 0 0;
+  text-align: left;
+}
+body:not(.portal-page) .hero .cta {
+  justify-content: flex-start;
+  margin-top: 28px;
+}
+body:not(.portal-page) .hero .chips {
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+/* ============================================================
+   UNIFIED HEADER/NAV (2026-10-24) — ahm/* + nexus headers adopt
+   the portal nav-matrix look: wide shell, same brand type, one
+   rounded pill container with borderless items, amber current.
+   ============================================================ */
+body:not(.portal-page) header {
+  border-bottom-color: transparent !important;
+  background: rgba(10, 9, 8, .82) !important;
+}
+body:not(.portal-page) header .wrap { max-width: 1320px; }
+/* brand: plain site-brand text. Selector must be `.nav > a.logo`
+   (0,3,1) to out-rank the first-gen `.nav a` pill (0,2,2). */
+body:not(.portal-page) .nav > a.logo {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: 0;
+  color: var(--ink) !important;
+  font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+body:not(.portal-page) .nav { min-height: 66px; }
+body:not(.portal-page) .nav > nav {
+  gap: 4px !important;
+  padding: 6px 8px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  background: rgba(10, 9, 8, .55) !important;
+  backdrop-filter: blur(10px);
+}
+body:not(.portal-page) .nav > nav > a,
+body:not(.portal-page) .nav > nav .has-menu > a {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 999px;
+  padding: 9px 15px !important;
+  /* uniform item type: match portal nav-matrix label scale */
+  font-family: "Cascadia Mono", "JetBrains Mono", Consolas, monospace !important;
+  font-size: clamp(10px, .8vw, 13px) !important;
+  font-weight: 600;
+  letter-spacing: .05em !important;
+  text-transform: uppercase;
+}
+body:not(.portal-page) .nav > nav > a:hover,
+body:not(.portal-page) .nav > nav .has-menu > a:hover,
+body:not(.portal-page) .nav > nav .has-menu > a:focus-within {
+  background: rgba(255, 255, 255, .07) !important;
+  color: var(--ink) !important;
+}
+/* current page: amber pill — must out-rank the transparent reset above,
+   hence the extra element/class chain in the selectors */
+body:not(.portal-page) .nav > nav > a.cur,
+body:not(.portal-page) .nav > nav .has-menu > a.cur {
+  color: var(--bg) !important;
+  background: var(--brand) !important;
+  border-color: var(--brand) !important;
+  font-weight: 700;
+}
+/* dropdown items: plain sans rows like the portal sub-menu */
+body:not(.portal-page) .nav .sub-menu a {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 8px 12px !important;
+}
+body:not(.portal-page) .nav .sub-menu a:hover,
+body:not(.portal-page) .nav .sub-menu a.cur {
+  background: rgba(245, 158, 11, .12) !important;
+  color: var(--brand) !important;
+}
+
+@media (max-width: 760px) {
+  body:not(.portal-page) { --ranxihub-header-offset: 101px; }
+  body:not(.portal-page) .wrap { padding-right: 18px; padding-left: 18px; }
+  body:not(.portal-page) .nav { align-items: flex-start; flex-direction: column; gap: 0; padding-top: 10px; padding-bottom: 10px; }
+  body:not(.portal-page) .nav > nav,
+  body:not(.portal-page) .nav > div:last-child {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  body:not(.portal-page) .nav > nav::-webkit-scrollbar,
+  body:not(.portal-page) .nav > div:last-child::-webkit-scrollbar { display: none; }
+  body:not(.portal-page) .hero,
+  body:not(.portal-page) .head { padding-top: 34px; }
+  body:not(.portal-page) .hero h1,
+  body:not(.portal-page) .head h1 { font-size: 27px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  body:not(.portal-page) {
+    --ink: #1a2333;
+    --mut: #5b6b83;
+    --brand: #b9770a;
+    --line: #dfe4eb;
+    --bg: #fff;
+    --card: #fff;
+    color: var(--ink) !important;
+    background: #fff !important;
+  }
+  body:not(.portal-page)::before { display: none; }
+  body:not(.portal-page) .card,
+  body:not(.portal-page) .m,
+  body:not(.portal-page) .q,
+  body:not(.portal-page) .team,
+  body:not(.portal-page) .bench,
+  body:not(.portal-page) .use-card,
+  body:not(.portal-page) .paper,
+  body:not(.portal-page) .price-card,
+  body:not(.portal-page) .step,
+  body:not(.portal-page) .faq,
+  body:not(.portal-page) .cta,
+  body:not(.portal-page) .cmp,
+  body:not(.portal-page) .res-box,
+  body:not(.portal-page) .next-steps {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Hero contact bar (mirrors portal.css, with fallbacks). */
+.hero-contact { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.hero-contact a { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono, ui-monospace, monospace); font-size: 13.5px; letter-spacing: .02em; text-decoration: none; border-radius: 999px; padding: 9px 20px; border: 1px solid rgba(245, 158, 11, .4); color: var(--brand, #f59e0b); background: rgba(245, 158, 11, .07); transition: .2s; }
+.hero-contact a.gh { color: var(--text, #fff7ed); border-color: rgba(245, 158, 11, .3); background: rgba(41, 37, 36, .5); }
+.hero-contact a:hover { border-color: var(--brand, #f59e0b); }

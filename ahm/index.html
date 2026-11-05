@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RanxiHub.AHM — Agent governance diagnostics: structured self-test, integration options, and local deep diagnosis.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>RanxiHub.AI · AHM Agent Governance Diagnostics</title>
+<link rel="stylesheet" href="../assets/ranxihub.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+  
+  
+  .nav a:hover{color:var(--brand);}
+  .hero{padding:64px 0 48px;text-align:center;}
+  .hero .tag{display:inline-block;background:rgba(245,158,11,.14);color:var(--brand);font-size:13px;padding:4px 12px;border-radius:20px;margin-bottom:18px;}
+  .hero h1{font-size:32px;line-height:1.4;font-weight:800;margin-bottom:14px;}
+  .hero h1 em{color:var(--brand);font-style:normal;}
+  .hero .sub{font-size:17px;color:var(--mut);max-width:640px;margin:0 auto 26px;}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;transition:.15s;}
+  .btn-p{background:var(--brand);color:#fff;}
+  .btn-p:hover{background:var(--brand-d);}
+  .btn-o{background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);}
+  .btn-o:hover{background:rgba(245,158,11,.10);}
+  section{padding:40px 0;}
+  .sec-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+  .sec-sub{color:var(--mut);margin-bottom:24px;font-size:15px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;}
+  .card h3{font-size:16px;margin-bottom:8px;}
+  .card p{font-size:14px;color:var(--mut);}
+  .price-card{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:26px;text-align:center;max-width:420px;margin:0 auto;}
+  .price-card .p-now{font-size:36px;font-weight:800;color:var(--brand);}
+  .price-card .p-was{color:var(--mut);text-decoration:line-through;font-size:16px;}
+  .price-card .p-tag{display:inline-block;background:rgba(249,115,22,.16);color:var(--warn);font-size:12px;padding:2px 10px;border-radius:12px;margin-left:8px;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;counter-reset:st;}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;position:relative;}
+  .step::before{counter-increment:st;content:counter(st);position:absolute;top:-10px;left:16px;background:var(--brand);color:#fff;width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;}
+  .step h4{font-size:15px;margin-bottom:4px;}
+  .step p{font-size:13px;color:var(--mut);}
+  .promise{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:12px;padding:20px 24px;font-size:14px;}
+  .promise b{color:var(--brand);}
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;}
+  .faq details{padding:16px 22px;border-bottom:1px solid var(--line);}
+  .faq details:last-child{border-bottom:none;}
+  .faq summary{font-weight:600;cursor:pointer;font-size:15px;}
+  .faq p{font-size:14px;color:var(--mut);margin-top:8px;}
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--mut);font-size:13px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="../index.html">RanxiHub.<span>AI</span></a>
+    <nav aria-label="Main navigation"><a href="../index.html">Home</a><div class="has-menu"><a href="index.html" class="cur">AHM</a><div class="sub-menu"><a href="index.html" class="cur">AHM Overview</a><a href="self-test.html">Free Self-Test</a><a href="connect.html">Integration</a><a href="deep-diagnosis.html">Deep Diagnosis</a><a href="brief-report.html">Brief Report</a><a href="report.html">Detailed Report</a></div></div><div class="has-menu"><a href="../nexus/index.html">NEXUS</a><div class="sub-menu"><a href="../nexus/index.html">Nexus Overview</a></div></div><a href="../dllm/index.html">DLLM</a><div class="has-menu"><a href="../others/index.html">More</a><div class="sub-menu"><a href="../others/index.html#frametale">FrameTale</a><a href="../others/index.html#digitallife">Digital Life</a><a href="../others/index.html#dshplus">DSH-PLUS</a></div></div><a href="../lab/index.html">Lab</a><a href="../index.html#roadmap">Roadmap</a><a href="../about.html">About</a><a href="../index.html#principles">Approach</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="tag">For AI teams of 3–20</span>
+    <h1>Does your Agent <em>forget, go black-box, silently drift</em> the moment it hits production?<br>It could fail in production at any moment, yet you don't dare deliver it to clients?</h1>
+    <p class="sub">One structured diagnosis turns it from a toy into a <strong>shippable, observable, regressive-testable</strong> engineering product—<br>no cloud lock-in, no source code sold, built for small teams.</p>
+    <div class="hero-contact" style="justify-content:center"><a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a><a class="gh" href="https://github.com/kialajin-l" target="_blank" rel="noopener">github.com/kialajin-l ↗</a></div>
+    <div class="cta">
+      <a class="btn btn-p" href="self-test.html">Free Self-Test (5 min) →</a>
+      <a class="btn btn-o" href="deep-diagnosis.html">Book a Deep Diagnosis</a>
+    </div>
+  </div>
+
+  <section id="preview">
+    <h2 class="sec-title">What it looks like: real interface preview</h2>
+    <p class="sec-sub">Below are real page screenshots from this site (sample data, not real customer reports). Left: the 5-minute self-test form; middle: the deep-diagnosis report's scorecard and overall conclusion; right: per-probe detail and key findings ranked by risk.</p>
+    <style>
+      .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+      .shot{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .4s cubic-bezier(.22,.61,.36,1),border-color .4s,box-shadow .4s;}
+      .shot:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 18px 40px -20px rgba(245,158,11,.28);}
+      .shot .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line);background:rgba(10,9,8,.6);}
+      .shot .bar i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;}
+      .shot .bar .url{flex:1;margin-left:6px;background:rgba(245,158,11,.07);border:1px solid var(--line);border-radius:8px;padding:3px 12px;font-family:"Cascadia Mono",Consolas,monospace;font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+      .shot img{display:block;width:100%;height:auto;}
+      .shot figcaption{padding:10px 14px;font-size:12.5px;color:var(--mut);border-top:1px solid var(--line);}
+      .shot figcaption b{color:var(--ink);}
+      @media(max-width:860px){.shots{grid-template-columns:1fr;}}
+    </style>
+    <div class="shots">
+      <figure class="shot">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">ranxihub.ai/ahm/self-test</span></div>
+        <img src="../assets/img/ahm-selftest.webp" alt="AHM free self-test form page screenshot: 12-question governance maturity score" loading="lazy">
+        <figcaption><b>Free Self-Test</b> · 12 questions pinpoint governance gaps, instant results</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">ranxihub.ai/ahm/report · Detailed Report</span></div>
+        <img src="../assets/img/ahm-report-top.webp" alt="AHM deep-diagnosis report page screenshot: scorecard and overall conclusion" loading="lazy">
+        <figcaption><b>Structured Diagnostic Report</b> · Overall score + conclusion + scope</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#84cc16"></i><span class="url">ranxihub.ai/ahm/report · Probe Details</span></div>
+        <img src="../assets/img/ahm-report-detail.webp" alt="AHM report probe-detail table and key findings screenshot" loading="lazy">
+        <figcaption><b>Probe Details + Key Findings</b> · Per-item confidence, ranked by risk</figcaption>
+      </figure>
+    </div>
+    <p style="font-size:12px;color:var(--mut);margin-top:10px;">Screenshots use sample data; no real customer reports are shown.</p>
+  </section>
+
+  <section id="why">
+    <h2 class="sec-title">Why a governance diagnosis?</h2>
+    <p class="sec-sub">Teams of 3–20 have no governance function—big-vendor tools lock you into the cloud and cost more, generic consulting lacks a framework, and open-source tools don't understand memory semantics.</p>
+    <div class="grid">
+      <div class="card"><h3>Forgets</h3><p>Key context is lost across sessions; users repeat themselves and the experience breaks down.</p></div>
+      <div class="card"><h3>Black box</h3><p>No traces in production; when something fails you can only guess, often debugging overnight.</p></div>
+      <div class="card"><h3>Silent drift</h3><p>The same input works today and fails tomorrow—no regression testing, no clear explanation, no confidence to ship.</p></div>
+    </div>
+  </section>
+
+  <section id="deliver">
+    <h2 class="sec-title">What you'll get</h2>
+    <div class="grid">
+      <div class="card"><h3>Remote 1:1 interview (2–3h)</h3><p>Based on your real code and production behavior, we review your Agent's governance maturity item by item.</p></div>
+      <div class="card"><h3>Structured diagnostic report (5–7 business days)</h3><p>Per-item scores + a governance roadmap + a prioritized checklist your team can act on directly.</p></div>
+      <div class="card"><h3>15-minute results walkthrough</h3><p>An online session covering the report's conclusions and first steps (included free).</p></div>
+    </div>
+  </section>
+
+  <section id="price">
+    <h2 class="sec-title" style="text-align:center;">Pricing & Availability</h2>
+    <div class="price-card">
+      <div><span class="p-now">Price TBD</span> <span class="p-tag">Updated once pricing is set</span></div>
+      <p style="margin-top:10px;color:var(--mut);font-size:14px;">One complete diagnosis: interview + report + walkthrough<br><b style="color:var(--brand);">Final price and deposit TBD</b>; payment method: Alipay; refund terms will be published alongside final pricing.</p>
+    </div>
+  </section>
+
+  <section id="flow">
+    <h2 class="sec-title">Self-serve exploration; booking is confirmed manually</h2>
+    <p class="sec-sub">Free self-test triage and report-template viewing are self-serve; local probes (Connector planned, self-serve once available); booking a deep diagnosis and delivery are confirmed manually.</p>
+    <div class="steps">
+      <div class="step"><h4>Free self-test triage</h4><p>12 questions in 5 minutes; generates a request_id and a structured diagnostic request.</p></div>
+      <div class="step"><h4>Choose an integration method</h4><p>The planned local Connector will run limited probes in your environment (not yet available); credentials stay local.</p></div>
+      <div class="step"><h4>Evidence-lite Brief Report</h4><p>One page: evidence level, key findings, items not checked, and next steps.</p></div>
+      <div class="step"><h4>Book a deep diagnosis</h4><p>Pay a deposit to reserve a slot (amount TBD); scheduling begins after an NDA is signed.</p></div>
+      <div class="step"><h4>Detailed report + human confirmation</h4><p>Deep-probe bundle → report draft (candidate) → human-confirmed accepted.</p></div>
+    </div>
+    <p style="text-align:center;margin-top:22px;">
+      <a class="btn btn-p" href="self-test.html">Start with the Free Self-Test →</a>
+      <a class="btn btn-o" href="#price" style="background:#fff7ed7ed;color:var(--brand);border:1.5px solid var(--brand);">View Pricing</a>
+    </p>
+    <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--mut);">
+      See what the report looks like (sample data): <a href="brief-report.html" style="color:var(--brand);">Brief Report (DEMO)</a> · <a href="report.html" style="color:var(--brand);">Detailed Report (DEMO)</a>
+    </p>
+  </section>
+
+  <section>
+    <div class="promise">
+      <b>Scope commitment (our boundary)</b>: we sell methodology, not implementation—<b>we deliver no core source code, even under NDA</b>; what you get is a portable, actionable governance methodology and roadmap. Any case study is published only after anonymization.
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">FAQ</h2>
+    <div class="faq">
+      <details><summary>Why not start with a free 15-minute chat?</summary><p>A free 1:1 can't guarantee delivery quality. The self-test + 15-minute results walkthrough are already included in the diagnosis; if you're unsatisfied after the interview, you can request a deposit refund within 24 hours as agreed.</p></details>
+      <details><summary>Will you look at our code? Could it leak?</summary><p>The diagnosis runs against your own stack; we read only and copy nothing. An NDA protects both parties throughout, and any case study is anonymized and requires your written consent before publication.</p></details>
+      <details><summary>What comes after the diagnosis?</summary><p>The report includes advanced options: architecture review and guided controlled integration (price TBD), optional, not required.</p></details>
+      <details><summary>How do you relate to tools like LangSmith / Datadog?</summary><p>We don't sell tools and don't lock you into the cloud. We teach you how to govern your Agent with methodology, and when useful we'll point out which open-source tools are worth choosing—complementary, not a replacement.</p></details>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — Agent governance diagnostics and local evidence services<br>To get in touch: first complete the <a href="self-test.html" style="color:var(--brand);">Free Self-Test</a>, then copy the request_id from the results page and email ranxihub@agent.qq.com (no online form is connected yet)<br>Long-term memory: <a href="../nexus/index.html" style="color:var(--brand);">RanxiHub.NEXUS</a></div>
+    <div class="footer-legal" style="margin-top:10px;">
+      <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/motion.js" defer></script>
+</body>
+</html>
