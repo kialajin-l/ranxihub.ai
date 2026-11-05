@@ -1,16 +1,19 @@
 # RanxiHub.AI — English site
 
 A standalone, dependency-free English version of the RanxiHub.AI project site,
-prepared for GitHub Pages. It is a **static site**: plain HTML, CSS, a little vanilla
+published with GitHub Pages. It is a **static site**: plain HTML, CSS, a little vanilla
 JavaScript, and local image/video assets. There is no build step, no package manager,
 no server and no backend.
 
+**Live:** https://kialajin-l.github.io/ranxihub.ai/
+**Repository:** https://github.com/kialajin-l/ranxihub.ai
+
 The Chinese source site lives in `../site/` in the working repository. This directory is
-the English mirror and is intended to be pushed as the **root of its own repository**.
+the English mirror and is published as the **root of its own repository**.
 
 ## Deploy to GitHub Pages
 
-### 1. Create the repository and push
+### 1. Push the site as the repository root
 
 ```bash
 cd site-en
@@ -18,15 +21,15 @@ git init
 git add .
 git commit -m "Initial English site"
 git branch -M main
-git remote add origin https://github.com/<your-account>/<your-repo>.git
+git remote add origin https://github.com/kialajin-l/ranxihub.ai.git
 git push -u origin main
 ```
 
 ### 2. Enable Pages
 
 In the repository: **Settings → Pages → Build and deployment → Deploy from a branch**,
-select branch `main` and folder `/ (root)`, then Save. GitHub will publish at
-`https://<your-account>.github.io/<your-repo>/`. If the repository is named
+select branch `main` and folder `/ (root)`, then Save. GitHub publishes this site at
+`https://kialajin-l.github.io/ranxihub.ai/`. If the repository is named
 `<your-account>.github.io`, it publishes at the apex instead.
 
 All internal links and asset paths are **relative**, so both a project subpath and an
@@ -70,8 +73,8 @@ handled by GitHub Pages.
   `ranxihub@agent.qq.com` and opens the visitor's mail client. It never claims a
   message was delivered. To switch to a real backend, replace the inline script at the
   bottom of `index.html` and keep the `#messageForm` / `#messageStatus` element IDs.
-- **Assets.** `assets/video/digitallife-30s.mp4` is about 8 MB. Total repository size is
-  about 11 MB, well within GitHub's limits. Images are WebP and are marked as
+- **Assets.** `assets/video/digitallife-30s.mp4` is about 9 MB. Total repository size is
+  about 10 MB, well within GitHub's limits. Images are WebP and are marked as
   AI-generated concept illustrations in their captions.
 - **Animations.** `lab/index.html` intentionally does not load `assets/motion.js`; it
   uses pure CSS reveal animations so content is visible on the first frame. Other pages
