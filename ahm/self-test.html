@@ -81,7 +81,7 @@
       <div class="full"><label>Main model tiers (comma-separated)</label><input type="text" id="modelTiers" value="gpt-4o, claude"></div>
       <div class="full"><label>Main goals (comma-separated)</label><input type="text" id="goals" value="Reduce ops load, stabilize long-term memory"></div>
     </div>
-    <div class="hint">This information only generates a structured request locally in your browser; nothing is uploaded automatically. Once exported, it can be used for a local AHM deep diagnosis or submitted to RanxiHub.AHM.</div>
+    <div class="hint">This information stays in your browser until you finish the test. When you submit the result below, only the low-sensitivity metadata request is sent to the AHM candidate service; raw logs, prompts, credentials and model output are never sent.</div>
   </div>
 
   <div class="bar" id="bar">Completed 0 / 12</div>
@@ -97,7 +97,7 @@
       <div id="resAdvice"></div>
       <div class="res-cta" id="resCta">
         <b id="ctaTitle">Get the full Agent Governance Checklist + book a 15-minute result review</b>
-        <p style="margin-top:6px;">No online form is connected, and contact details are not sent automatically. Copy the <code>request_id</code> below and email ranxihub@agent.qq.com to reach RanxiHub.AHM; you will receive the full checklist and can book one free result review.</p>
+        <p style="margin-top:6px;">This page can submit the low-sensitivity self-test metadata to RanxiHub.AHM and receive a candidate-only brief report. It is not a real Agent probe or health certification.</p>
         <p style="font-size:12px;color:var(--mut);margin-top:8px;">You can also <a href="deep-diagnosis.html" style="color:var(--brand);">book a deep diagnosis (pricing not yet set; to be updated)</a>.</p>
       </div>
       <div class="export" id="exportBox">
@@ -105,6 +105,11 @@
         <p class="hint">Downloadable as JSON for a local AHM deep diagnosis, and usable as a self_reported sample for a later evaluation. This is the <b>input</b> contract sent to AHM, distinct from the Report JSON that AHM outputs (report_schema_version); the request contains no logs, prompts, keys, or other sensitive content.</p>
         <button class="btn ghost" onclick="downloadRequest()">Download diagnostic request JSON</button>
         <pre id="exportPre"></pre>
+      </div>
+      <div class="export" id="onlineBox" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.3);">
+        <b>AHM online candidate result</b>
+        <p class="hint" id="onlineStatus">Submitting the metadata-only request...</p>
+        <pre id="onlinePre"></pre>
       </div>
     </div>
     <div class="next-steps" style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-top:16px;font-size:14px;">
@@ -120,7 +125,7 @@
 <footer>
   <div class="wrap">
     <div style="font-weight:700;color:var(--ink);">© 2026 RanxiHub.AI · Independent AI Systems</div>
-    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — self-test results are for evaluation only and are not a commitment. This page is a pre-launch preview: no online form is connected and nothing on this page is sent or stored.</div>
+    <div style="font-size:12.5px;color:var(--mut);margin-top:6px;">RanxiHub.AHM — self-test results are for evaluation only and are not a commitment. The online path sends only metadata and returns a candidate report; raw diagnostic data remains local.</div>
     <div class="footer-legal" style="margin-top:10px;">
       <a href="https://github.com/kialajin-l" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:ranxihub@agent.qq.com">ranxihub@agent.qq.com</a>
@@ -152,6 +157,7 @@ var RUBRIC = {
 };
 var answers = new Array(QUESTIONS.length).fill(0);
 var lastRequest = null;
+var AHM_CHECKUP_URL = "https://ahm-web-adapter-341054-13-1308513995.sh.run.tcloudbase.com/v1/checkup";
 
 function build(){
   var q = document.getElementById("quiz");
@@ -219,11 +225,12 @@ function buildRequest(){
     goals: goals.length ? goals : ["unspecified"]
   };
 }
-function submit(){
+async function submit(){
   if (answers.indexOf(0) >= 0) return;
   var total = 0;
   for (var i = 0; i < answers.length; i++) total += answers[i];
   showResult(total);
+  await submitToAhm();
 }
 function showResult(total){
   var box = document.getElementById("resBox");
@@ -260,6 +267,30 @@ function showResult(total){
   document.getElementById("exportBox").style.display = "block";
   document.getElementById("result").style.display = "block";
   document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+async function submitToAhm(){
+  var box = document.getElementById("onlineBox");
+  var status = document.getElementById("onlineStatus");
+  var output = document.getElementById("onlinePre");
+  box.style.display = "block";
+  status.textContent = "Submitting the metadata-only request...";
+  output.textContent = "";
+  try {
+    var response = await fetch(AHM_CHECKUP_URL, {
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(lastRequest)
+    });
+    var body = await response.json();
+    if (!response.ok) throw new Error(body.error || "HTTP " + response.status);
+    status.textContent = "Connected. The service returned a candidate-only result; this is not a real Agent probe diagnosis.";
+    output.textContent = JSON.stringify(body, null, 2);
+  } catch (error) {
+    status.textContent = "Online submission was unavailable (" + error.message + "). The local JSON download remains available below.";
+    output.textContent = "No remote report was accepted.";
+  }
 }
 function downloadRequest(){
   if (!lastRequest) return;
